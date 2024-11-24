@@ -13,9 +13,25 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// SQL upit za dobijanje vozila
-$sql = "SELECT id, cena, marka, model, godiste, predjeni_kilometri FROM vozila";
+// Definisanje broja automobila po stranici
+$items_per_page = 20;
+
+// Dobijanje trenutne stranice iz URL parametra (ako postoji)
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = max($page, 1);  // Postavljanje minimalne stranice na 1
+
+$start_from = ($page - 1) * $items_per_page;
+
+// SQL upit za dobijanje vozila sa LIMIT-om za paginaciju
+$sql = "SELECT id, cena, marka, model, godiste, predjeni_kilometri FROM vozila LIMIT $start_from, $items_per_page";
 $result = $conn->query($sql);
+
+// Dobijanje ukupnog broja vozila
+$total_sql = "SELECT COUNT(*) AS total FROM vozila";
+$total_result = $conn->query($total_sql);
+$total_row = $total_result->fetch_assoc();
+$total_items = $total_row['total'];
+$total_pages = ceil($total_items / $items_per_page);
 ?>
 
 <div class="admin-panel">
@@ -26,7 +42,7 @@ $result = $conn->query($sql);
             <ul>
             <?php if (is_admin()): ?>
                 <li>
-                    <a href="<?= URL_INDEX ?>?module=admin-panel">Dashboard</a>
+                    <a href="<?= URL_INDEX ?>?module=admin-">Dashboard</a>
                 </li>
             <?php endif; ?>
             <li><a href="#">Korisnici</a></li>
@@ -53,6 +69,21 @@ $result = $conn->query($sql);
         <!-- Data Table -->
         <section class="sekcijaadmin">
             <h2 class="admin2">Lista Automobila</h2>
+
+            <!-- Paginacija - Premestili smo ovo iznad tabele -->
+            <div class="pagination">
+                <?php if ($page > 1): ?>
+                    <a href="<?= URL_INDEX ?>?module=admin-panel&page=<?= $page - 1 ?>" class="pagination-prev">Prethodna</a>
+                <?php endif; ?>
+                
+                <span>Stranica <?= $page ?> od <?= $total_pages ?></span>
+
+                <?php if ($page < $total_pages): ?>
+                    <a href="<?= URL_INDEX ?>?module=admin-panel&page=<?= $page + 1 ?>" class="pagination-next">Sledeća</a>
+                <?php endif; ?>
+            </div>
+
+            <!-- Tabela sa podacima -->
             <table>
                 <thead>
                     <tr>
@@ -71,27 +102,34 @@ $result = $conn->query($sql);
                         // Prikazivanje podataka u tabeli
                         while($row = $result->fetch_assoc()) {
                             echo "<tr>
-                                    <td>" . $row['id'] . "</td>
-                                    <td>" . $row['marka'] . "</td>
-                                    <td>" . $row['model'] . "</td>
-                                    <td>" . $row['godiste'] . "</td>
-                                    <td>" . $row['predjeni_kilometri'] . "</td>
-                                    <td>" . $row['cena'] . "</td>
-                                    <td>
-                                        <button class='btn-edit'>Izmeni</button>
-                                        <button class='btn-delete'>Obriši</button>
-                                    </td>
-                                  </tr>";
+                            <td>" . $row['id'] . "</td>
+                            <td>" . $row['marka'] . "</td>
+                            <td>" . $row['model'] . "</td>
+                            <td>" . $row['godiste'] . "</td>
+                            <td>" . $row['predjeni_kilometri'] . "</td>
+                            <td>" . $row['cena'] . "</td>
+                            <td>
+                                <a href='" . URL_INDEX . "?module=vozila&action=edit&id=" . $row['id'] . "' class='navdugme'>
+                                    <button class='btn-edit'>Izmeni</button>
+                                </a>
+                                <a href='" . URL_INDEX . "?module=vozila&action=delete&id=" . $row['id'] . "' class='navdugme'>
+                                    <button class='btn-delete'>Obriši</button>
+                                </a>
+                            </td>
+                          </tr>";
+                    
                         }
                     } else {
                         echo "<tr><td colspan='7'>Nema podataka</td></tr>";
                     }
-
-                    // Zatvaranje konekcije
-                    $conn->close();
                     ?>
                 </tbody>
             </table>
         </section>
     </main>
 </div>
+
+<?php
+// Zatvaranje konekcije
+$conn->close();
+?>

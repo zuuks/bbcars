@@ -476,4 +476,23 @@ table tbody tr:hover {
     color: rgb(37, 118, 136);
 }
 
-
+#deletePopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: none;
+}
+.popup-content button {
+    margin: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.popup-content p {
+    margin-bottom: 20px;
+}
