@@ -135,3 +135,98 @@ header img{
 .jedinice{
     font-size: 20px;
 }
+
+/* Main Content */
+.content {
+    margin-left: 260px;
+    padding: 2em;
+    min-height: 100vh;
+    background: #1a1a1a;
+}
+
+.content header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2em;
+}
+
+.content h1 {
+    font-size: 28px;
+}
+
+.btn-primary {
+    background-color: rgb(53, 168, 194);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: rgb(37, 118, 136);
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #272727;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2em;
+}
+
+table thead {
+    background-color: rgb(37, 118, 136);
+}
+
+table th,
+table td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #444;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #333;
+}
+
+table tbody tr:hover {
+    background-color: #444;
+}
+
+/* Action Buttons */
+.btn-edit {
+    background-color: #ffc107;
+    color: #272727;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.btn-edit:hover {
+    background-color: #e0a800;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+

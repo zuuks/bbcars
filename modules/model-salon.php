@@ -26,9 +26,9 @@ if ($_app['action'] != '') {
 				$recenzija = $_POST['recenzija'];
 
 				$sql = "INSERT INTO `vozila` 
-								(`marka`, `model`, `tip_goriva`, `godiste`, `predjeni_km`, `snaga_kw`, `cena`, `novi_polovni`, `uvoz_domac`, `recenzija`) 
+								(`marka`, `model`, `tip_goriva`, `godiste`, `predjeni_km`, `snaga_kw`, `cena`, `novi_polovni`, `uvoz_domac`) 
 							VALUES
-								('{$marka}', '{$model}', '{$tip_goriva}', '{$godiste}', '{$predjeni_km}', '{$snaga_kw}', '{$cena}', '{$novi_polovni}', '{$uvoz_domac}', '{$recenzija}')";
+								('{$marka}', '{$model}', '{$tip_goriva}', '{$godiste}', '{$predjeni_km}', '{$snaga_kw}', '{$cena}', '{$novi_polovni}', '{$uvoz_domac}')";
 				mysqli_query($db, $sql);
 
 				if (!isset ($_FILES['images'])) {
