@@ -457,20 +457,4 @@ table tbody tr:hover {
     background-color: #c82333;
 }
 
-/* Footer */
-footer {
-    height: 5em;
-    background: linear-gradient(0deg, #272727b1, #2d2d2d00);
-    text-shadow: 2px 2px 3px #272727;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#footerP {
-    text-align: center;
-    padding: 1em;
-}
-
 
