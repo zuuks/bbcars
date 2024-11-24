@@ -2,4 +2,4 @@
  
 # dejaneeeee kralju
 
-# deki spid
+# deki spid kurac
