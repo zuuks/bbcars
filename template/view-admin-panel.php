@@ -33,7 +33,7 @@ $result = $conn->query($sql);
 
     <!-- Main Content -->
     <main class="content">
-        <header>
+        <header class="admin-header">
             <h1 class="admin">Dobrodošao, Admin</h1>
             <?php if (is_admin()): ?>
                 <a href="<?= URL_INDEX ?>?module=salon&action=submit" class="navdugme">

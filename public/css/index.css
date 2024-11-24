@@ -409,6 +409,11 @@ table {
     margin-bottom: 2em;
     
 }
+
+.admin-header{
+    background: transparent;
+}
+
 .sekcijaadmin{
     padding-bottom: 50px;
 }
