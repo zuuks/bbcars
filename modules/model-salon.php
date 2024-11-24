@@ -7,6 +7,7 @@ function vozilo_image_filename($id, $thumb = false)
 }
 
 if ($_app['action'] != '') {
+
     switch ($_app['action']) {
         case 'submit':
             if ($_POST) {

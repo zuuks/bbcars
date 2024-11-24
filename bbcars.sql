@@ -35,24 +35,24 @@ CREATE TABLE IF NOT EXISTS `kontakt` (
 DELETE FROM `kontakt`;
 
 -- Dumping structure for table bbcars.salon
-CREATE TABLE IF NOT EXISTS `salon` (
+CREATE TABLE IF NOT EXISTS `vozila` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cena` int(11) DEFAULT NULL,
   `marka` varchar(50) DEFAULT NULL,
   `model` varchar(50) DEFAULT NULL,
-  `vrsta_goriva` enum('benzin','dizel','hibrid','elektricni') DEFAULT NULL,
+  `tip_goriva` enum('benzin','dizel','hibrid','elektricni') DEFAULT NULL,
   `godiste` year(4) DEFAULT NULL,
-  `predjeni_kilometri` int(11) DEFAULT NULL,
-  `kubikaza` int(11) DEFAULT NULL,
+  `predjeni_km` int(11) DEFAULT NULL,
+  `snaga_kw` int(11) DEFAULT NULL,
   `snaga_motora` int(11) DEFAULT NULL,
-  `novo_polovno` enum('novo','polovno') DEFAULT NULL,
-  `uvoz_domace` enum('uvoz','domace') DEFAULT NULL,
+  `novi_polovni` enum('novo','polovno') DEFAULT NULL,
+  `uvoz_domac` enum('uvoz','domace') DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table bbcars.salon: ~99 rows (approximately)
-DELETE FROM `salon`;
-INSERT INTO `salon` (`id`, `cena`, `marka`, `model`, `vrsta_goriva`, `godiste`, `predjeni_kilometri`, `kubikaza`, `snaga_motora`, `novo_polovno`, `uvoz_domace`) VALUES
+DELETE FROM `vozila`;
+INSERT INTO `vozila` (`id`, `cena`, `marka`, `model`, `tip_goriva`, `godiste`, `predjeni_km`, `snaga_kw`, `snaga_motora`, `novi_polovni`, `uvoz_domac`) VALUES
 	(20, 7500, 'Volkswagen', 'Golf 6', 'dizel', '2010', 180000, 1598, 77, 'polovno', 'uvoz'),
 	(21, 8500, 'Opel', 'Astra J', 'benzin', '2012', 120000, 1364, 103, 'polovno', 'domace'),
 	(22, 11000, 'Audi', 'A3', 'dizel', '2015', 160000, 1968, 110, 'polovno', 'uvoz'),

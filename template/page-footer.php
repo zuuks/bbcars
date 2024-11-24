@@ -17,7 +17,7 @@
             body.style.backgroundImage = "url(<?= DIR_PUBLIC_IMAGES . 'kontaktbg.jpg' ?>)";
             body.style.backgroundColor = "white";
             header.style.backgroundColor = "rgb(87, 135, 144)";
-        } else if (moduleParam === 'salon') {
+        } else if (moduleParam === 'salon' || moduleParam === 'prodavnica' ) {
             body.style.backgroundImage = "none";
             body.style.backgroundColor = "white";
             header.style.backgroundColor = "rgb(87, 135, 144)";
