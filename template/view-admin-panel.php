@@ -24,16 +24,24 @@ $result = $conn->query($sql);
         <h2>Admin Panel</h2>
         <nav>
             <ul>
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Korisnici</a></li>
-                <li><a href="#">Statistika</a></li>
+            <?php if (is_admin()): ?>
+                <li>
+                    <a href="<?= URL_INDEX ?>?module=admin-panel">Dashboard</a>
+                </li>
+            <?php endif; ?>
+            <li><a href="#">Korisnici</a></li>
+            <?php if (is_admin()): ?>
+                <li>
+                    <a href="<?= URL_INDEX ?>?module=statistics">Statistika</a>
+                </li>
+            <?php endif; ?>    
             </ul>
         </nav>
     </aside>
 
     <!-- Main Content -->
     <main class="content">
-        <header>
+        <header class="admin-header">
             <h1 class="admin">Dobrodošao, Admin</h1>
             <?php if (is_admin()): ?>
                 <a href="<?= URL_INDEX ?>?module=salon&action=submit" class="navdugme">

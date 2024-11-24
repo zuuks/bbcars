@@ -2,4 +2,4 @@
  
 # dejaneeeee kralju
 
-# deki spid kurac
+# deki spid kurac saftaj
