@@ -25,10 +25,8 @@ $result = $conn->query($sql);
         <nav>
             <ul>
                 <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Automobili</a></li>
                 <li><a href="#">Korisnici</a></li>
-                <li><a href="#">Postavke</a></li>
-                <li><a href="#">Izloguj se</a></li>
+                <li><a href="#">Statistika</a></li>
             </ul>
         </nav>
     </aside>
