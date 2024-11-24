@@ -37,9 +37,6 @@
 				<option value="domace" <?= isset($article['uvoz_domac']) && $article['uvoz_domac'] == 'domace' ? 'selected' : '' ?>>Domaće</option>
 			</select><br>
 			
-			<label>Ugradjeni kod za video recenziju (iframe)</label>
-			<input class="kontaktInput" type="text" name="recenzija" value="<?= htmlspecialchars($article['recenzija'] ?? '') ?>"><br>
-			
 			<label>Slike za upload</label>
 			<input type="file" name="images[]" multiple><br>
 			
