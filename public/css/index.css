@@ -470,5 +470,10 @@ table tbody tr:hover {
 .admin2 {
     color: rgb(37, 118, 136);
 }
-
+.h1prod2{
+    text-align: center;
+}
+.prodavnica{
+    margin-bottom: 50px;
+}
 
