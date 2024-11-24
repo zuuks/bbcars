@@ -17,9 +17,9 @@
 			</div>
 			<ul class="ul-nav">
 				<li><a href="<?= URL_INDEX ?>" class="navdugme"><i class="fa-solid fa-house"></i>Pocetna</a></li>
-				<li>
-					<?php include (DIR_MODULES . 'model-dropdown.php'); ?>
-				</li>
+
+				<li><a href="<?= URL_INDEX ?>?module=contact" class="navdugme"><i
+								class="fa-solid fa-address-book"></i>Prodavnica</a></li>
 
 				<?php if ($_SESSION['login_status'] ?? '' == true): ?>
 					<li><a href="<?= URL_INDEX ?>?module=contact" class="navdugme"><i
