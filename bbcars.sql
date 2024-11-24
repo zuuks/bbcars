@@ -16,10 +16,12 @@
 
 
 -- Dumping database structure for bbcars
+DROP DATABASE IF EXISTS `bbcars`;
 CREATE DATABASE IF NOT EXISTS `bbcars` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `bbcars`;
 
 -- Dumping structure for table bbcars.kontakt
+DROP TABLE IF EXISTS `kontakt`;
 CREATE TABLE IF NOT EXISTS `kontakt` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `imeprez` varchar(100) DEFAULT NULL,
@@ -34,25 +36,43 @@ CREATE TABLE IF NOT EXISTS `kontakt` (
 -- Dumping data for table bbcars.kontakt: ~0 rows (approximately)
 DELETE FROM `kontakt`;
 
--- Dumping structure for table bbcars.salon
+-- Dumping structure for table bbcars.users
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `user_level` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table bbcars.users: ~2 rows (approximately)
+DELETE FROM `users`;
+INSERT INTO `users` (`id`, `username`, `password`, `user_level`) VALUES
+	(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 1),
+	(16, 'dejan', 'b7bc5176c1ea7208ddf7e8c4994ae47c', 0);
+
+-- Dumping structure for table bbcars.vozila
+DROP TABLE IF EXISTS `salon`;
 CREATE TABLE IF NOT EXISTS `vozila` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cena` int(11) DEFAULT NULL,
   `marka` varchar(50) DEFAULT NULL,
   `model` varchar(50) DEFAULT NULL,
-  `tip_goriva` enum('benzin','dizel','hibrid','elektricni') DEFAULT NULL,
+  `vrsta_goriva` enum('benzin','dizel','hibrid','elektricni') DEFAULT NULL,
   `godiste` year(4) DEFAULT NULL,
-  `predjeni_km` int(11) DEFAULT NULL,
-  `snaga_kw` int(11) DEFAULT NULL,
+  `predjeni_kilometri` int(11) DEFAULT NULL,
+  `kubikaza` int(11) DEFAULT NULL,
   `snaga_motora` int(11) DEFAULT NULL,
-  `novi_polovni` enum('novo','polovno') DEFAULT NULL,
-  `uvoz_domac` enum('uvoz','domace') DEFAULT NULL,
+  `novo_polovno` enum('novo','polovno') DEFAULT NULL,
+  `uvoz_domace` enum('uvoz','domace') DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table bbcars.salon: ~99 rows (approximately)
+-- Dumping data for table bbcars.vozila: ~99 rows (approximately)
 DELETE FROM `vozila`;
-INSERT INTO `vozila` (`id`, `cena`, `marka`, `model`, `tip_goriva`, `godiste`, `predjeni_km`, `snaga_kw`, `snaga_motora`, `novi_polovni`, `uvoz_domac`) VALUES
+INSERT INTO `vozila` (`id`, `cena`, `marka`, `model`, `vrsta_goriva`, `godiste`, `predjeni_kilometri`, `kubikaza`, `snaga_motora`, `novo_polovno`, `uvoz_domace`) VALUES
 	(20, 7500, 'Volkswagen', 'Golf 6', 'dizel', '2010', 180000, 1598, 77, 'polovno', 'uvoz'),
 	(21, 8500, 'Opel', 'Astra J', 'benzin', '2012', 120000, 1364, 103, 'polovno', 'domace'),
 	(22, 11000, 'Audi', 'A3', 'dizel', '2015', 160000, 1968, 110, 'polovno', 'uvoz'),
@@ -152,22 +172,6 @@ INSERT INTO `vozila` (`id`, `cena`, `marka`, `model`, `tip_goriva`, `godiste`, `
 	(121, 13000, 'BMW', 'X5', 'dizel', '2016', 120000, 2993, 160, 'polovno', 'domace'),
 	(122, 11000, 'Ford', 'Kuga', 'benzin', '2014', 100000, 1999, 120, 'polovno', 'uvoz'),
 	(123, 13000, 'Mazda', '6', 'benzin', '2017', 90000, 1998, 120, 'polovno', 'domace');
-
--- Dumping structure for table bbcars.users
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  `user_level` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Dumping data for table bbcars.users: ~2 rows (approximately)
-DELETE FROM `users`;
-INSERT INTO `users` (`id`, `username`, `password`, `user_level`) VALUES
-	(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 1),
-	(16, 'dejan', 'b7bc5176c1ea7208ddf7e8c4994ae47c', 0);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

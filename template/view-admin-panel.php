@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 
 // SQL upit za dobijanje vozila
-$sql = "SELECT id, cena, marka, model, godiste, predjeni_km FROM vozila";
+$sql = "SELECT id, cena, marka, model, godiste, predjeni_kilometri FROM vozila";
 $result = $conn->query($sql);
 ?>
 
@@ -25,8 +25,10 @@ $result = $conn->query($sql);
         <nav>
             <ul>
                 <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Automobili</a></li>
                 <li><a href="#">Korisnici</a></li>
-                <li><a href="#">Statistika</a></li>
+                <li><a href="#">Postavke</a></li>
+                <li><a href="#">Izloguj se</a></li>
             </ul>
         </nav>
     </aside>
@@ -67,7 +69,7 @@ $result = $conn->query($sql);
                                     <td>" . $row['marka'] . "</td>
                                     <td>" . $row['model'] . "</td>
                                     <td>" . $row['godiste'] . "</td>
-                                    <td>" . $row['predjeni_km'] . "</td>
+                                    <td>" . $row['predjeni_kilometri'] . "</td>
                                     <td>" . $row['cena'] . "</td>
                                     <td>
                                         <button class='btn-edit'>Izmeni</button>
