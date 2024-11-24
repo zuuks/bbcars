@@ -1,64 +1,89 @@
-<div class="admin-panel">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <h2>Admin Panel</h2>
-            <nav>
-                <ul>
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Automobili</a></li>
-                    <li><a href="#">Korisnici</a></li>
-                    <li><a href="#">Postavke</a></li>
-                    <li><a href="#">Izloguj se</a></li>
-                </ul>
-            </nav>
-        </aside>
+<?php
+// Povezivanje sa bazom podataka
+$servername = "localhost";
+$username = "root"; // Prilagodite korisničko ime
+$password = ""; // Prilagodite lozinku
+$dbname = "bbcars";
 
-        <!-- Main Content -->
-        <main class="content">
-            <header>
-                <h1>Dobrodošli, Admin</h1>
-                <button class="btn-primary">Dodaj novi automobil</button>
-            </header>
-            
-            <!-- Data Table -->
-            <section>
-                <h2>Lista Automobila</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Model</th>
-                            <th>Godina</th>
-                            <th>Kilometraža</th>
-                            <th>Cena (€)</th>
-                            <th>Akcije</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Audi A4</td>
-                            <td>2018</td>
-                            <td>120,000</td>
-                            <td>25,000</td>
-                            <td>
-                                <button class="btn-edit">Izmeni</button>
-                                <button class="btn-delete">Obriši</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>BMW 320d</td>
-                            <td>2020</td>
-                            <td>80,000</td>
-                            <td>30,000</td>
-                            <td>
-                                <button class="btn-edit">Izmeni</button>
-                                <button class="btn-delete">Obriši</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-        </main>
-    </div>
+// Kreiranje konekcije
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Provera konekcije
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// SQL upit za dobijanje vozila
+$sql = "SELECT id, cena, marka, model, godiste, predjeni_km FROM vozila";
+$result = $conn->query($sql);
+?>
+
+<div class="admin-panel">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2>Admin Panel</h2>
+        <nav>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Korisnici</a></li>
+                <li><a href="#">Statistika</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+        <header>
+            <h1 class="admin">Dobrodošli, Admin</h1>
+            <?php if (is_admin()): ?>
+                <li><a href="<?= URL_INDEX ?>?module=salon&action=submit" class="navdugme">
+                    <button class="btn-primary">Dodaj novi automobil</button>
+                </a></li>
+            <?php endif; ?>
+        </header>
+        
+        <!-- Data Table -->
+        <section>
+            <h2>Lista Automobila</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Marka</th>
+                        <th>Model</th>
+                        <th>Godina</th>
+                        <th>Kilometraža</th>
+                        <th>Cena (€)</th>
+                        <th>Akcije</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($result->num_rows > 0) {
+                        // Prikazivanje podataka u tabeli
+                        while($row = $result->fetch_assoc()) {
+                            echo "<tr>
+                                    <td>" . $row['id'] . "</td>
+                                    <td>" . $row['marka'] . "</td>
+                                    <td>" . $row['model'] . "</td>
+                                    <td>" . $row['godiste'] . "</td>
+                                    <td>" . $row['predjeni_km'] . "</td>
+                                    <td>" . $row['cena'] . "</td>
+                                    <td>
+                                        <button class='btn-edit'>Izmeni</button>
+                                        <button class='btn-delete'>Obriši</button>
+                                    </td>
+                                  </tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='7'>Nema podataka</td></tr>";
+                    }
+
+                    // Zatvaranje konekcije
+                    $conn->close();
+                    ?>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</div>
