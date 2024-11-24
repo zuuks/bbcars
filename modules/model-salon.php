@@ -12,7 +12,7 @@ if ($_app['action'] != '') {
         case 'submit':
             if ($_POST) {
                 if (($_POST['cancel'] ?? '') == 1)
-                    redirect(URL_INDEX);
+                    redirect(URL_INDEX . "?module=admin-panel");
 
                 // Preuzimanje podataka sa forme
                 $marka = $_POST['marka'];
@@ -34,7 +34,7 @@ if ($_app['action'] != '') {
                 mysqli_query($db, $sql);
 
                 // Obrada slika
-                if (!isset ($_FILES['images'])) {
+                if (!isset($_FILES['images'])) {
                     $_page_view['_error'][] = 'Niste odabrali slike za upload.';
                 } else {
                     $images = $_FILES['images'];
@@ -65,7 +65,7 @@ if ($_app['action'] != '') {
                             move_uploaded_file($tmp_name, $destination);
                         }
                     }
-                    redirect(URL_INDEX);
+                    redirect(URL_INDEX . "?module=admin-panel");
                 }
             }
             $_page_view['page_title'] = 'Dodaj vozilo';
@@ -74,7 +74,7 @@ if ($_app['action'] != '') {
         case 'edit':
             if ($_POST) {
                 if (($_POST['cancel'] ?? '') == 1)
-                    redirect(URL_INDEX);
+                    redirect(URL_INDEX . "?module=admin-panel");
 
                 // Preuzimanje podataka sa forme
                 $marka = $_POST['marka'];
@@ -104,7 +104,7 @@ if ($_app['action'] != '') {
                             `id` = {$_app['id']}
                         LIMIT 1";
                 mysqli_query($db, $sql);
-                redirect(URL_INDEX);
+                redirect(URL_INDEX . "?module=admin-panel");
             }
 
             // Prikazivanje podataka za uređivanje
@@ -117,27 +117,27 @@ if ($_app['action'] != '') {
             // Brisanje vozila iz baze
             $sql = "DELETE FROM `vozila` WHERE `id`={$_app['id']} LIMIT 1";
             mysqli_query($db, $sql);
-            redirect(URL_INDEX);
+            redirect(URL_INDEX . "?module=admin-panel");
             break;
         default:
             $_page_view['page_title'] = 'Ne postoji akcija';
             break;
     }
 } else {
-	if ($_app['id'] > 0) {
-		$article = [];
-		$sql = "SELECT *
+    if ($_app['id'] > 0) {
+        $article = [];
+        $sql = "SELECT *
 				FROM `vozila`
 				WHERE `id`={$_app['id']}
 				LIMIT 1
 			";
-		$result = mysqli_query($db, $sql);
-		$article = mysqli_fetch_assoc($result);
+        $result = mysqli_query($db, $sql);
+        $article = mysqli_fetch_assoc($result);
 
-		if (empty ($article))
-			redirect(URL_INDEX . '?module=error404');
+        if (empty($article))
+            redirect(URL_INDEX . '?module=error404');
 
-		$_page_view['view_filename'] = './template/view-vozilo-article.php';
-	} 
+        $_page_view['view_filename'] = './template/view-vozilo-article.php';
+    }
 }
 ?>
