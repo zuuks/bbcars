@@ -483,3 +483,50 @@ table tbody tr:hover {
     margin-bottom: 50px;
 }
 
+/* Kontejner za dugmadi */
+.buttons-container {
+    display: flex; /* Omogućava raspored elemenata u redu */
+    gap: 10px; /* Razmak između dugmadi */
+    justify-content: center; /* Poravnanje dugmadi u centru */
+    margin-top: 10px; /* Razmak sa vrha */
+}
+
+/* Stilizovanje dugmadi unutar kontejnera */
+.btn-primary, .btn-export {
+    padding: 10px 20px; /* Unutrašnji razmak */
+    font-size: 16px; /* Veličina fonta */
+    border-radius: 5px; /* Zaobljene ivice */
+    cursor: pointer; /* Prikazuje da je dugme klikabilno */
+    transition: all 0.3s ease; /* Glatka animacija za promene */
+}
+
+/* Dugme Dodaj novi automobil */
+.btn-primary {
+    background-color: #007bff; /* Plava boja */
+    color: white; /* Bela boja teksta */
+    border: 2px solid #007bff; /* Ivica iste boje kao pozadina */
+}
+
+/* Dugme Export to JSON */
+.btn-export {
+    background-color: #4CAF50; /* Zelena boja */
+    color: white; /* Bela boja teksta */
+    border: 2px solid #4CAF50; /* Ivica iste boje kao pozadina */
+}
+
+/* Hover efekti za dugmadi */
+.btn-primary:hover {
+    background-color: #0056b3; /* Tamnija plava pri hoveru */
+    border-color: #0056b3;
+}
+
+.btn-export:hover {
+    background-color: #45a049; /* Tamnija zelena pri hoveru */
+    border-color: #45a049;
+}
+
+/* Fokus efekti */
+.btn-primary:focus, .btn-export:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Plavi sjaj za plavo dugme */
+}

@@ -13,16 +13,43 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Definisanje broja automobila po stranici
+// Proverite da li je zahtev za izvoz
+if (isset($_GET['action']) && $_GET['action'] == 'export') {
+    // SQL upit za dobijanje svih automobila
+    $sql = "SELECT id, cena, marka, model, godiste, predjeni_kilometri FROM vozila";
+    $result = $conn->query($sql);
+
+    // Kreiranje niza za skladištenje podataka o vozilima
+    $vehicles = [];
+
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $vehicles[] = $row;
+        }
+
+        // Generisanje JSON-a
+        $json_data = json_encode($vehicles, JSON_PRETTY_PRINT);
+
+        // Postavljanje odgovarajućih zaglavlja za preuzimanje JSON fajla
+        header('Content-Type: application/json');
+        header('Content-Disposition: attachment; filename="vozila.json"');
+        
+        // Slanje JSON podataka za preuzimanje
+        echo $json_data;
+
+        exit; // Završava izvršavanje skripte nakon slanja fajla
+    } else {
+        echo "Nema podataka za eksportovanje."; // Ispis greške ako nema podataka
+    }
+}
+
+
+// Definisanje broja stavki po stranici i trenutne stranice
 $items_per_page = 20;
-
-// Dobijanje trenutne stranice iz URL parametra (ako postoji)
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$page = max($page, 1);  // Postavljanje minimalne stranice na 1
-
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
 $start_from = ($page - 1) * $items_per_page;
 
-// SQL upit za dobijanje vozila sa LIMIT-om za paginaciju
+// SQL upit za dobijanje vozila sa paginacijom
 $sql = "SELECT id, cena, marka, model, godiste, predjeni_kilometri FROM vozila LIMIT $start_from, $items_per_page";
 $result = $conn->query($sql);
 
@@ -57,20 +84,26 @@ $total_pages = ceil($total_items / $items_per_page);
 
     <!-- Main Content -->
     <main class="content">
-        <header class="admin-header">
-            <h1 class="admin">Dobrodošao, Admin</h1>
-            <?php if (is_admin()): ?>
-                <a href="<?= URL_INDEX ?>?module=salon&action=submit" class="navdugme">
-                    <button class="btn-primary">Dodaj novi automobil</button>
-                </a>
-            <?php endif; ?>
-        </header>
+    <header class="admin-header">
+    <h1 class="admin">Dobrodošao, Admin</h1>
+    <?php if (is_admin()): ?>
+        <div class="buttons-container">
+            <a href="<?= URL_INDEX ?>?module=salon&action=submit" class="navdugme">
+                <button class="btn-primary">Dodaj novi automobil</button>
+            </a>
+            <!-- Dugme za export -->
+            <a href="<?= URL_INDEX ?>?module=admin-panel&action=export" class="navdugme">
+                <button class="btn-export">Export to JSON</button>
+            </a>
+        </div>
+    <?php endif; ?>
+</header>
         
         <!-- Data Table -->
         <section class="sekcijaadmin">
             <h2 class="admin2">Lista Automobila</h2>
 
-            <!-- Paginacija - Premestili smo ovo iznad tabele -->
+            <!-- Paginacija -->
             <div class="pagination">
                 <?php if ($page > 1): ?>
                     <a href="<?= URL_INDEX ?>?module=admin-panel&page=<?= $page - 1 ?>" class="pagination-prev">Prethodna</a>
