@@ -7,7 +7,7 @@
                 <p><i>NAJNOVIJE GENERACIJE</i></p>
             </div>
             <div class="dugmad">
-                <a href="<?= URL_INDEX ?>?module=salon&id=1" class="dugmePonuda">POGLEDAJ PONUDU</a>
+                <a href="<?= URL_INDEX ?>?module=prodavnica" class="dugmePonuda">POGLEDAJ PONUDU</a>
                 <?php if ($_SESSION['login_status'] ?? '' == true): ?>
 					<a href="<?= URL_INDEX ?>?module=contact" class="dugmePonuda" id="termin">ZAKAZITE TERMIN</a>
 				<?php else: ?>
