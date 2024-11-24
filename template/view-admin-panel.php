@@ -50,7 +50,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $start_from = ($page - 1) * $items_per_page;
 
 // SQL upit za dobijanje vozila sa paginacijom
-$sql = "SELECT id, cena, marka, model, godiste, predjeni_kilometri FROM vozila LIMIT $start_from, $items_per_page";
+$sql = "SELECT id, cena, marka, model, godiste, predjeni_kilometri, vrsta_goriva, kubikaza, snaga_motora, novo_polovno, uvoz_domace FROM vozila LIMIT $start_from, $items_per_page";
 $result = $conn->query($sql);
 
 // Dobijanje ukupnog broja vozila
@@ -125,6 +125,11 @@ $total_pages = ceil($total_items / $items_per_page);
                         <th>Model</th>
                         <th>Godina</th>
                         <th>Kilometraža</th>
+                        <th>Vrsta goiva</th>
+                        <th>Zapremina motora</th>
+                        <th>Snaga motora</th>
+                        <th>Poreklo vozila</th>
+                        <th>Stanje vozila</th>
                         <th>Cena (€)</th>
                         <th>Akcije</th>
                     </tr>
@@ -141,7 +146,12 @@ $total_pages = ceil($total_items / $items_per_page);
                                     <td>" . $row['model'] . "</td>
                                     <td>" . $row['godiste'] . "</td>
                                     <td>" . $row['predjeni_kilometri'] . "</td>
-                                     <td>" . $row['cena'] . "</td>
+                                    <td>" . $row['vrsta_goriva'] . "</td>
+                                    <td>" . $row['kubikaza'] . "</td>
+                                    <td>" . $row['snaga_motora'] . "</td>
+                                    <td>" . $row['novo_polovno'] . "</td>
+                                    <td>" . $row['uvoz_domace'] . "</td>
+                                    <td>" . $row['cena'] . "</td>
                                     <td>
                                         <a href='" . URL_INDEX . "?module=salon&action=edit&id=" . $row['id'] . "' class='navdugme'>
                                             <button class='btn-edit'>Izmeni</button>

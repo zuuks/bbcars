@@ -35,22 +35,6 @@
 						<li><a href="<?= URL_INDEX ?>?module=admin-panel" class="navdugme"><i
 									class="fa-solid fa-address-book"></i>Admin Panel</a></li>
 					<?php endif; ?>
-					<?php if (is_admin() && isset ($_GET['module']) && $_GET['module'] === 'salon' && isset ($_GET['id'])): ?>
-						<?php
-						$id = $_GET['id'];
-						?>
-						<li>
-							<a href="<?= URL_INDEX ?>?module=salon&action=edit&id=<?= $id ?>" class="navdugme">
-								<i class="fa-solid fa-pencil"></i>
-							</a>
-						</li>
-						<li>
-							<a href="<?= URL_INDEX ?>?module=salon&action=delete&id=<?= $id ?>" class="navdugme">
-								<i class="fa-solid fa-trash"></i>
-							</a>
-						</li>
-					<?php endif; ?>
-
 
 					<li><a href="<?= URL_INDEX ?>?module=login&action=logout" class="navdugme"><i
 								class="fa-solid fa-sign-out"></i>Odjava</a></li>
