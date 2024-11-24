@@ -43,7 +43,7 @@ $result = $conn->query($sql);
         </header>
         
         <!-- Data Table -->
-        <section>
+        <section class="sekcijaadmin">
             <h2>Lista Automobila</h2>
             <table>
                 <thead>
