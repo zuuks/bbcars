@@ -391,7 +391,9 @@ textarea{
     border-radius: 5px;
     font-size: 16px;
     transition: 0.3s;
+    margin-right: 30px; /* Ovo dodaje razmak sa desne strane */
 }
+
 
 .btn-primary:hover {
     background-color: rgb(37, 118, 136);
@@ -458,6 +460,15 @@ table tbody tr:hover {
 
 .btn-delete:hover {
     background-color: #c82333;
+}
+
+.admin {
+    color: rgb(37, 118, 136);
+    margin-left: 10px; /* Ovo dodaje razmak sa desne strane */
+}
+
+.admin2 {
+    color: rgb(37, 118, 136);
 }
 
 

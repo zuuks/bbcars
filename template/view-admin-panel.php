@@ -34,7 +34,7 @@ $result = $conn->query($sql);
     <!-- Main Content -->
     <main class="content">
         <header>
-            <h1 class="admin">Dobrodošli, Admin</h1>
+            <h1 class="admin">Dobrodošao, Admin</h1>
             <?php if (is_admin()): ?>
                 <a href="<?= URL_INDEX ?>?module=salon&action=submit" class="navdugme">
                     <button class="btn-primary">Dodaj novi automobil</button>
@@ -44,7 +44,7 @@ $result = $conn->query($sql);
         
         <!-- Data Table -->
         <section class="sekcijaadmin">
-            <h2>Lista Automobila</h2>
+            <h2 class="admin2">Lista Automobila</h2>
             <table>
                 <thead>
                     <tr>
