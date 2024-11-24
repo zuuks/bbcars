@@ -2,22 +2,29 @@
 if (!$db) {
     die("Greška pri povezivanju sa bazom.");
 }
-$markaDropdown = '<select name="marka">';
-$sql = "SELECT DISTINCT marka FROM vozila";
-$result = mysqli_query($db, $sql);
 
-if ($result && mysqli_num_rows($result) > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $marka = htmlspecialchars($row['marka']); 
-        $markaDropdown .= "<option value=\"$marka\">$marka</option>";
+$_page_view['view_filename'] = DIR_VIEW . 'view-prodavnica.php';
+
+function getMarke($db) {
+    $sql = "SELECT marka FROM vozila"; 
+    $result = mysqli_query($db, $sql);
+    $markaDropdown = '<select name="marka">';
+    $markaDropdown .= '<option value="" disabled selected hidden>Sve marke</option>';
+    $markaDropdown .= '<option value="">Sve marke</option>'; 
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $marka = htmlspecialchars($row['marka']);
+            $markaDropdown .= "<option value=\"$marka\">$marka</option>";
+        }
     }
     $markaDropdown .= '</select>';
-} else {
-    $markaDropdown = '<p>Trenutno nema dostupnih marki.</p>';
+    if (!$result || mysqli_num_rows($result) === 0) {
+        $markaDropdown = '<p>Trenutno nema dostupnih marki.</p>';
+    }
+
+    return $markaDropdown;
 }
+
 ?>
-<div class="filteri">
-    <h1 class="h3Prod">Automobili</h1>
-    <?php echo $markaDropdown; ?>
-    <span></span>
-</div>
+
+
