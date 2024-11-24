@@ -1,18 +1,9 @@
 <?php
 
-function salon_image_filename($id, $thumb = false)
+function vozilo_image_filename($id, $thumb = false)
 {
 	$thumb_suffix = $thumb ? '-th' : '';
-	return sprintf('salon-%d%s.jpg', $id, $thumb_suffix);
-}
-function deleteFolder($folderPath) {
-    $files = glob($folderPath . '/*');
-    foreach ($files as $file) {
-        if (is_file($file)) {
-            unlink($file);
-        }
-    }
-    return rmdir($folderPath);
+	return sprintf('vozilo-%d%s.jpg', $id, $thumb_suffix);
 }
 
 if ($_app['action'] != '') {
@@ -22,36 +13,38 @@ if ($_app['action'] != '') {
 				if (($_POST['cancel'] ?? '') == 1)
 					redirect(URL_INDEX);
 
-
-				$salon_title = $_POST['salon_title'];
-				$duzina = $_POST['duzina'];
-				$snaga = $_POST['snaga'];
-				$potrosnja = $_POST['potrosnja'];
+				// Preuzimanje podataka sa forme
+				$marka = $_POST['marka'];
+				$model = $_POST['model'];
+				$tip_goriva = $_POST['tip_goriva'];
+				$godiste = $_POST['godiste'];
+				$predjeni_km = $_POST['predjeni_km'];
+				$snaga_kw = $_POST['snaga_kw'];
 				$cena = $_POST['cena'];
+				$novi_polovni = $_POST['novi_polovni'];
+				$uvoz_domac = $_POST['uvoz_domac'];
 				$recenzija = $_POST['recenzija'];
 
-				$sql = "INSERT INTO `salon` 
-								(`salon_title`, `duzina`, `snaga`, `potrosnja`, `cena`,`recenzija`) 
+				$sql = "INSERT INTO `vozila` 
+								(`marka`, `model`, `tip_goriva`, `godiste`, `predjeni_km`, `snaga_kw`, `cena`, `novi_polovni`, `uvoz_domac`, `recenzija`) 
 							VALUES
-								('{$salon_title}', '{$duzina}', '{$snaga}', '{$potrosnja}','{$cena}','{$recenzija}')";
+								('{$marka}', '{$model}', '{$tip_goriva}', '{$godiste}', '{$predjeni_km}', '{$snaga_kw}', '{$cena}', '{$novi_polovni}', '{$uvoz_domac}', '{$recenzija}')";
 				mysqli_query($db, $sql);
-
 
 				if (!isset ($_FILES['images'])) {
 					$_page_view['_error'][] = 'Niste odabrali slike za upload.';
 				} else {
 					$images = $_FILES['images'];
 					foreach ($images['tmp_name'] as $key => $tmp_name) {
-						$image = $_FILES['image'];
+						$image = $_FILES['images'];
 						if ($image['error'][$key] != 0) {
 							$_page_view['_error'][] = 'Došlo je do greške. Slika nije učitana';
 						} else {
 
-							$salon_id = mysqli_insert_id($db);
-							$filename = sprintf('salon-%d_%d.jpg', $salon_id, ($key + 1));
+							$vozilo_id = mysqli_insert_id($db);
+							$filename = sprintf('vozilo-%d_%d.jpg', $vozilo_id, ($key + 1));
 
-
-							$folderPath = DIR_PUBLIC_IMAGES . "salon-" . $salon_id;
+							$folderPath = DIR_PUBLIC_IMAGES . "vozilo-" . $vozilo_id;
 							if (!is_dir($folderPath) && !mkdir($folderPath, 0777, true)) {
 								$_page_view['_error'][] ="Greška: Nije moguće kreirati direktorijum $folderPath";
 							}
@@ -63,71 +56,75 @@ if ($_app['action'] != '') {
 							}
 
 							move_uploaded_file($tmp_name, $destination);
-
-
 						}
 					}
 					redirect(URL_INDEX);
 				}
-
-
 			}
-			$_page_view['page_title'] = 'Dodaj automobil';
-			$_page_view['view_filename'] = './template/view-salon-submit.php';
+			$_page_view['page_title'] = 'Dodaj vozilo';
+			$_page_view['view_filename'] = './template/view-vozilo-submit.php';
 			break;
 		case 'edit':
 			if ($_POST) {
 				if (($_POST['cancel'] ?? '') == 1)
 					redirect(URL_INDEX);
 
-				$salon_title = $_POST['salon_title'];
-				$duzina = $_POST['duzina'];
-				$snaga = $_POST['snaga'];
-				$potrosnja = $_POST['potrosnja'];
+				// Preuzimanje podataka sa forme
+				$marka = $_POST['marka'];
+				$model = $_POST['model'];
+				$tip_goriva = $_POST['tip_goriva'];
+				$godiste = $_POST['godiste'];
+				$predjeni_km = $_POST['predjeni_km'];
+				$snaga_kw = $_POST['snaga_kw'];
 				$cena = $_POST['cena'];
+				$novi_polovni = $_POST['novi_polovni'];
+				$uvoz_domac = $_POST['uvoz_domac'];
 				$recenzija = $_POST['recenzija'];
 
-				$sql = "UPDATE `salon` SET
-							`salon_title` = '{$salon_title}',
-							`duzina` = '{$duzina}',
-							`snaga` = '{$snaga}',
-							`potrosnja` = '{$potrosnja}',
+				$sql = "UPDATE `vozila` SET
+							`marka` = '{$marka}',
+							`model` = '{$model}',
+							`tip_goriva` = '{$tip_goriva}',
+							`godiste` = '{$godiste}',
+							`predjeni_km` = '{$predjeni_km}',
+							`snaga_kw` = '{$snaga_kw}',
 							`cena` = '{$cena}',
+							`novi_polovni` = '{$novi_polovni}',
+							`uvoz_domac` = '{$uvoz_domac}',
 							`recenzija` = '{$recenzija}'
 						WHERE
-							`salon_id` = {$_app['id']}
+							`vozilo_id` = {$_app['id']}
 						LIMIT 1";
 				mysqli_query($db, $sql);
 				redirect(URL_INDEX);
 			}
 			$sql = "SELECT *
-					FROM `salon`
-					WHERE `salon_id`={$_app['id']}
+					FROM `vozila`
+					WHERE `vozilo_id`={$_app['id']}
 					LIMIT 1
 				";
 			$result = mysqli_query($db, $sql);
 			$article = mysqli_fetch_assoc($result);
-			$_page_view['page_title'] = 'Izmena članka';
-			$_page_view['view_filename'] = './template/view-salon-submit.php';
+			$_page_view['page_title'] = 'Izmena vozila';
+			$_page_view['view_filename'] = './template/view-vozilo-submit.php';
 			break;
 		case 'delete':
 			if ($_POST) {
 				if ($_POST['confirm_action'] == 1) {
-					$sql = "DELETE FROM `salon` WHERE `salon_id`={$_app['id']} LIMIT 1";
+					$sql = "DELETE FROM `vozila` WHERE `vozilo_id`={$_app['id']} LIMIT 1";
 					mysqli_query($db, $sql);
-					$folderPath = DIR_PUBLIC_IMAGES .  "salon-" . $_app['id'];
-					deleteFolder($folderPath);
+
 					redirect(URL_INDEX);
 				} else if ($_POST['confirm_action'] == 0) {
 					redirect(URL_INDEX);
 				}
 			}
 
-			$sql = "SELECT `salon_title` FROM `salon` WHERE `salon_id`={$_app['id']} LIMIT 1";
+			$sql = "SELECT `marka`, `model` FROM `vozila` WHERE `vozilo_id`={$_app['id']} LIMIT 1";
 			$result = mysqli_query($db, $sql);
 			$row = mysqli_fetch_assoc($result);
 			$_page_view['admin_confirmation'] = 1;
-			$_page_view['page_title'] = $row['salon_title'];
+			$_page_view['page_title'] = $row['marka'] . ' ' . $row['model'];
 			$_page_view['view_filename'] = '';
 			break;
 	}
@@ -135,30 +132,31 @@ if ($_app['action'] != '') {
 	if ($_app['id'] > 0) {
 		$article = [];
 		$sql = "SELECT *
-				FROM `salon`
-				WHERE `salon_id`={$_app['id']}
+				FROM `vozila`
+				WHERE `vozilo_id`={$_app['id']}
 				LIMIT 1
 			";
 		$result = mysqli_query($db, $sql);
 		$article = mysqli_fetch_assoc($result);
-		$article['salon_image_filename'] = salon_image_filename($article['salon_id']);
+		$article['vozilo_image_filename'] = vozilo_image_filename($article['vozilo_id']);
 
 		if (empty ($article))
 			redirect(URL_INDEX . '?module=error404');
 
-		$_page_view['view_filename'] = './template/view-salon-article.php';
+		$_page_view['view_filename'] = './template/view-vozilo-article.php';
 	} else {
-		$salon = [];
+		$vozila = [];
 		$sql = "SELECT * 
-				FROM `salon`";
+				FROM `vozila`";
 		$result = mysqli_query($db, $sql);
 		while ($row = mysqli_fetch_assoc($result)) {
-			$row['salon_thumb_filename'] = salon_image_filename($row['salon_id'], true);
-			$salon[] = $row;
+			$row['vozilo_thumb_filename'] = vozilo_image_filename($row['vozilo_id'], true);
+			$vozila[] = $row;
 		}
 
-		$_page_view['view_filename'] = './template/view-salon-list.php';
+		$_page_view['view_filename'] = './template/view-vozilo-list.php';
 	}
 }
+
 
 ?>
