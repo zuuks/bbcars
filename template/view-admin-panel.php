@@ -36,9 +36,9 @@ $result = $conn->query($sql);
         <header>
             <h1 class="admin">Dobrodošli, Admin</h1>
             <?php if (is_admin()): ?>
-                <li><a href="<?= URL_INDEX ?>?module=salon&action=submit" class="navdugme">
+                <a href="<?= URL_INDEX ?>?module=salon&action=submit" class="navdugme">
                     <button class="btn-primary">Dodaj novi automobil</button>
-                </a></li>
+                </a>
             <?php endif; ?>
         </header>
         

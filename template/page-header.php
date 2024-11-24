@@ -33,7 +33,7 @@
 				<?php if ($_SESSION['login_status'] ?? '' == true): ?>
 					<?php if (is_admin()): ?>
 						<li><a href="<?= URL_INDEX ?>?module=admin-panel" class="navdugme"><i
-									class="fa-solid fa-address-book"></i>Dodaj</a></li>
+									class="fa-solid fa-address-book"></i>Admin Panel</a></li>
 					<?php endif; ?>
 					<?php if (is_admin() && isset ($_GET['module']) && $_GET['module'] === 'salon' && isset ($_GET['id'])): ?>
 						<?php
