@@ -101,22 +101,24 @@ $total_pages = ceil($total_items / $items_per_page);
                     if ($result->num_rows > 0) {
                         // Prikazivanje podataka u tabeli
                         while($row = $result->fetch_assoc()) {
-                            echo "<tr>
-                            <td>" . $row['id'] . "</td>
-                            <td>" . $row['marka'] . "</td>
-                            <td>" . $row['model'] . "</td>
-                            <td>" . $row['godiste'] . "</td>
-                            <td>" . $row['predjeni_kilometri'] . "</td>
-                            <td>" . $row['cena'] . "</td>
-                            <td>
-                                <a href='" . URL_INDEX . "?module=vozila&action=edit&id=" . $row['id'] . "' class='navdugme'>
-                                    <button class='btn-edit'>Izmeni</button>
-                                </a>
-                                <a href='" . URL_INDEX . "?module=vozila&action=delete&id=" . $row['id'] . "' class='navdugme'>
-                                    <button class='btn-delete'>Obriši</button>
-                                </a>
-                            </td>
-                          </tr>";
+                            echo 
+                                "<tr>
+                                    <td>" . $row['id'] . "</td>
+                                    <td>" . $row['marka'] . "</td>
+                                    <td>" . $row['model'] . "</td>
+                                    <td>" . $row['godiste'] . "</td>
+                                    <td>" . $row['predjeni_kilometri'] . "</td>
+                                     <td>" . $row['cena'] . "</td>
+                                    <td>
+                                        <a href='" . URL_INDEX . "?module=salon&action=edit&id=" . $row['id'] . "' class='navdugme'>
+                                            <button class='btn-edit'>Izmeni</button>
+                                        </a>
+                                
+                                        <a href='" . URL_INDEX . "?module=vozila&action=delete&id=" . $row['id'] . "' class='navdugme'>
+                                            <button class='btn-delete'>Obriši</button>
+                                        </a>
+                                    </td>
+                                </tr>";
                     
                         }
                     } else {

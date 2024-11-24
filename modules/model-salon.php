@@ -111,7 +111,7 @@ if ($_app['action'] != '') {
             $sql = "SELECT * FROM `vozila` WHERE `vozilo_id`={$_app['id']}";
             $result = mysqli_query($db, $sql);
             $_page_view['page_title'] = 'Izmeni vozilo';
-            $_page_view['view_filename'] = './template/view-vozilo-edit.php';
+            $_page_view['view_filename'] = './template/view-vozilo-submit.php';
             break;
         case 'delete':
             // Brisanje vozila iz baze
