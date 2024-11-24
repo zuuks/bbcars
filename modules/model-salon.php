@@ -101,21 +101,21 @@ if ($_app['action'] != '') {
                             `novo_polovno` = '{$novo_polovno}', 
                             `uvoz_domace` = '{$uvoz_domace}' 
                         WHERE
-                            `vozilo_id` = {$_app['id']}
+                            `id` = {$_app['id']}
                         LIMIT 1";
                 mysqli_query($db, $sql);
                 redirect(URL_INDEX);
             }
 
             // Prikazivanje podataka za uređivanje
-            $sql = "SELECT * FROM `vozila` WHERE `vozilo_id`={$_app['id']}";
+            $sql = "SELECT * FROM `vozila` WHERE `id`={$_app['id']}";
             $result = mysqli_query($db, $sql);
             $_page_view['page_title'] = 'Izmeni vozilo';
             $_page_view['view_filename'] = './template/view-vozilo-submit.php';
             break;
         case 'delete':
             // Brisanje vozila iz baze
-            $sql = "DELETE FROM `vozila` WHERE `vozilo_id`={$_app['id']} LIMIT 1";
+            $sql = "DELETE FROM `vozila` WHERE `id`={$_app['id']} LIMIT 1";
             mysqli_query($db, $sql);
             redirect(URL_INDEX);
             break;
