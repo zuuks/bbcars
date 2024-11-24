@@ -136,6 +136,7 @@ function filterVozila($db, $filters) {
     if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
             $slika = htmlspecialchars($row['slika']); // Obezbeđujemo sigurnu putanju
+            $id = htmlspecialchars($row['id']); // ID iz baze za dinamički URL
             $output .= '<div class="vozilo">';
             $output .= '<div class="slikaVozilo" style="background-image: url(\'' . $slika . '\'); background-size: cover; background-position: center; width: 300px; height: 200px;">';
             $output .= '</div>';
@@ -143,7 +144,7 @@ function filterVozila($db, $filters) {
             $output .= '<h2>' . htmlspecialchars($row['marka'] . ' ' . $row['model']) . '</h2>';
             $output .= '<h3>Cena: €' . htmlspecialchars($row['cena']) . '</h3>';
             $output .= '<p>Godiste: ' . htmlspecialchars($row['godiste']) . '</p>';
-            $output .= '<button id="kliknaauto" class="dugmezaKola">Pogledaj</button>';
+            $output .= '<a href="index.php?module=salon&id=' . $id . '" id="kliknaauto" class="dugmezaKola">Pogledaj</a>';
             $output .= '</div>';
             $output .= '</div>';
         }
