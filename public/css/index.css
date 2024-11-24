@@ -300,6 +300,17 @@ textarea{
     border: 3px solid rgb(3, 49, 77);
     border-radius: 2em;
 }
-
+/*prodavnica*/
+.filteri{
+    margin: auto;
+    margin-top: 4%;
+    width: 1400px;
+    height: 300px;
+    background-color: red;
+}
+.h3Prod{
+    position: absolute;
+    margin-top: -40px;
+}
 
 /*uredi*/
