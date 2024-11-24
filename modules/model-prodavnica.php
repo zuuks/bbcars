@@ -16,12 +16,8 @@ if ($result && mysqli_num_rows($result) > 0) {
     $markaDropdown = '<p>Trenutno nema dostupnih marki.</p>';
 }
 ?>
-<div class="prodavnica">
-    <div class="filteri">
-        <h1 class="h3Prod">Automobili</h1>
-        <?php 
-        echo $markaDropdown;
-        ?>
-        <span></span>
-    </div>
+<div class="filteri">
+    <h1 class="h3Prod">Automobili</h1>
+    <?php echo $markaDropdown; ?>
+    <span></span>
 </div>

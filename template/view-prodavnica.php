@@ -1,4 +1,4 @@
-<?php
-include(DIR_MODULES . 'model-prodavnica.php');
-echo $markaDropdown;
-?>
+
+<div class="prodavnica">
+    <?php include(DIR_MODULES . 'model-prodavnica.php'); ?>
+</div>
