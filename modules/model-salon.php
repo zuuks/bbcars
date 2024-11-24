@@ -123,5 +123,21 @@ if ($_app['action'] != '') {
             $_page_view['page_title'] = 'Ne postoji akcija';
             break;
     }
-} 
+} else {
+	if ($_app['id'] > 0) {
+		$article = [];
+		$sql = "SELECT *
+				FROM `vozila`
+				WHERE `id`={$_app['id']}
+				LIMIT 1
+			";
+		$result = mysqli_query($db, $sql);
+		$article = mysqli_fetch_assoc($result);
+
+		if (empty ($article))
+			redirect(URL_INDEX . '?module=error404');
+
+		$_page_view['view_filename'] = './template/view-vozilo-article.php';
+	} 
+}
 ?>

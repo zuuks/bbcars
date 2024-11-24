@@ -482,7 +482,32 @@ table tbody tr:hover {
 .prodavnica{
     margin-bottom: 50px;
 }
+#rezultati{
+    padding-bottom: 800px;
+}
+.dugmezaKola {
+    position: absolute;
+    right: 2px;
+    bottom: 30px;
+    padding: 8px 12px;
+    background-color: #578790;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
+.dugmezaKola:hover {
+    background-color: #364548;
+}
+.vozilo{
+    margin: auto;
+    float: left;
+    margin-left: 30px;
+    padding: 5px;
+    position: relative;
+}
 /* Kontejner za dugmadi */
 .buttons-container {
     display: flex; /* Omogućava raspored elemenata u redu */

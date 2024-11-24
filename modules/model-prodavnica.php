@@ -135,13 +135,16 @@ function filterVozila($db, $filters) {
 
     if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
+            $slika = htmlspecialchars($row['slika']); // Obezbeđujemo sigurnu putanju
             $output .= '<div class="vozilo">';
-            $output .= '<h3>' . htmlspecialchars($row['marka'] . ' ' . $row['model']) . '</h3>';
-            $output .= '<p>Gorivo: ' . htmlspecialchars($row['vrsta_goriva']) . '</p>';
-            $output .= '<p>Stanje: ' . htmlspecialchars($row['novo_polovno']) . '</p>';
-            $output .= '<p>Cena: €' . htmlspecialchars($row['cena']) . '</p>';
-            $output .= '<p>Kilometraža: ' . htmlspecialchars($row['predjeni_kilometri']) . ' km</p>';
-            $output .= '<p>Snaga: ' . htmlspecialchars($row['snaga_motora']) . ' kW</p>';
+            $output .= '<div class="slikaVozilo" style="background-image: url(\'' . $slika . '\'); background-size: cover; background-position: center; width: 300px; height: 200px;">';
+            $output .= '</div>';
+            $output .= '<div class="podaciVozilo">';
+            $output .= '<h2>' . htmlspecialchars($row['marka'] . ' ' . $row['model']) . '</h2>';
+            $output .= '<h3>Cena: €' . htmlspecialchars($row['cena']) . '</h3>';
+            $output .= '<p>Godiste: ' . htmlspecialchars($row['godiste']) . '</p>';
+            $output .= '<button id="kliknaauto" class="dugmezaKola">Pogledaj</button>';
+            $output .= '</div>';
             $output .= '</div>';
         }
     } else {
