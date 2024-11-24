@@ -26,7 +26,12 @@ $result = $conn->query($sql);
             <ul>
                 <li><a href="#">Dashboard</a></li>
                 <li><a href="#">Korisnici</a></li>
-                <li><a href="#">Statistika</a></li>
+                <?php if (is_admin()): ?>
+    <li>
+        <a href="<?= URL_INDEX ?>?module=statistics">Statistika</a>
+    </li>
+<?php endif; ?>
+                
             </ul>
         </nav>
     </aside>
