@@ -27,66 +27,55 @@
             </tr>
         </table>
         <h1 class="h1prod2">Izdvajamo za vas...</h1>
-        <div id="rezultati"><?php
-        
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
-            
-            $filteri = [
-                'marka' => $_POST['marka'] ?? '',
-                'model' => $_POST['model'] ?? '',
-                'gorivo' => $_POST['gorivo'] ?? '',
-                'stanje' => $_POST['stanje'] ?? '',
-                'cena_od' => $_POST['cena_od'] ?? '',
-                'cena_do' => $_POST['cena_do'] ?? '',
-                'km_od' => $_POST['km_od'] ?? '',
-                'km_do' => $_POST['km_do'] ?? '',
-                'snaga' => $_POST['snaga'] ?? ''
-            ];
-        
-            echo pretrazi($db, $filteri);
-            exit;
-        }
-        ?>
+        <div id="rezultati">
         </div>
 
     </div>
 </div>
 <script>
     $(document).ready(function () {
-        // Kada se klikne dugme Pogledaj
-        $("#filteriProdavnica").click(function () {
-            // Prikupljanje vrednosti sa forme
-            var marka = $("select[name='marka']").val();
-            var model = $("select[name='model']").val();
-            var gorivo = $("select[name='gorivo']").val();
-            var stanje = $("select[name='stanje']").val();
-            var cenaOd = $("#cenaod").val();
-            var cenaDo = $("#cenado").val();
-            var kmOd = $("#kmod").val();
-            var kmDo = $("#kmdo").val();
-            var snaga = $("#snaga").val();
+        $('#filteriProdavnica').on('click', function () {
+            const filters = {
+                marka: $('select[name="marka"]').val(),
+                model: $('select[name="model"]').val(),
+                gorivo: $('select[name="gorivo"]').val(),
+                stanje: $('select[name="stanje"]').val(),
+                cenaod: $('#cenaod').val(),
+                cenado: $('#cenado').val(),
+                kmod: $('#kmod').val(),
+                kmdo: $('#kmdo').val(),
+                snaga: $('#snaga').val()
+            };
 
-            // Slanje AJAX zahteva na server
             $.ajax({
-                url: "", // Prazan URL jer je JS i PHP u istom fajlu
-                method: "POST",
-                data: {
-                    marka: marka,
-                    model: model,
-                    gorivo: gorivo,
-                    stanje: stanje,
-                    cena_od: cenaOd,
-                    cena_do: cenaDo,
-                    km_od: kmOd,
-                    km_do: kmDo,
-                    snaga: snaga
-                },
+                url: "",
+                method: 'POST',
+                data: { action: 'filter', filters: filters },
                 success: function (response) {
-                    // Prikaz rezultata pretrage
-                    $("#rezultati").html(response);
+                    $('#rezultati').html(response);
                 },
                 error: function () {
-                    alert("Došlo je do greške prilikom pretrage.");
+                    $('#rezultati').html('<p>Došlo je do greške prilikom filtriranja.</p>');
+                }
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        // Kada se marka promeni, ažuriraj modele
+        $('select[name="marka"]').on('change', function () {
+            const selectedMarka = $(this).val();
+
+            $.ajax({
+                url: "",
+                method: 'POST',
+                data: { action: 'getModels', marka: selectedMarka },
+                success: function (response) {
+                    $('select[name="model"]').html(response);
+                },
+                error: function () {
+                    $('select[name="model"]').html('<option value="">Greška pri učitavanju modela</option>');
                 }
             });
         });

@@ -82,77 +82,102 @@ function getStanje($db) {
     return $stanjeDropdown;
 }
 
-function pretrazi($db, $filteri) {
-    // Početak SQL upita
-    $sql = "SELECT * FROM vozila WHERE 1=1";
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'filter') {
+    echo filterVozila($db, $_POST['filters']);
+    exit;
+}
 
-    // Dodavanje filtera samo ako su dostupni
-    if (!empty($filteri['marka'])) {
-        $marka = mysqli_real_escape_string($db, $filteri['marka']);
-        $sql .= " AND marka = '$marka'";
+function filterVozila($db, $filters) {
+    $conditions = [];
+    
+    if (!empty($filters['marka'])) {
+        $marka = mysqli_real_escape_string($db, $filters['marka']);
+        $conditions[] = "marka = '$marka'";
+    }
+    if (!empty($filters['model'])) {
+        $model = mysqli_real_escape_string($db, $filters['model']);
+        $conditions[] = "model = '$model'";
+    }
+    if (!empty($filters['gorivo'])) {
+        $gorivo = mysqli_real_escape_string($db, $filters['gorivo']);
+        $conditions[] = "vrsta_goriva = '$gorivo'";
+    }
+    if (!empty($filters['stanje'])) {
+        $stanje = mysqli_real_escape_string($db, $filters['stanje']);
+        $conditions[] = "novo_polovno = '$stanje'";
+    }
+    if (!empty($filters['cenaod'])) {
+        $cenaod = (float) $filters['cenaod'];
+        $conditions[] = "cena >= $cenaod";
+    }
+    if (!empty($filters['cenado'])) {
+        $cenado = (float) $filters['cenado'];
+        $conditions[] = "cena <= $cenado";
+    }
+    if (!empty($filters['kmod'])) {
+        $kmod = (int) $filters['kmod'];
+        $conditions[] = "predjeni_kilometri >= $kmod";
+    }
+    if (!empty($filters['kmdo'])) {
+        $kmdo = (int) $filters['kmdo'];
+        $conditions[] = "predjeni_kilometri <= $kmdo";
+    }
+    if (!empty($filters['snaga'])) {
+        $snaga = (int) $filters['snaga'];
+        $conditions[] = "snaga_motora >= $snaga";
     }
 
-    if (!empty($filteri['model'])) {
-        $model = mysqli_real_escape_string($db, $filteri['model']);
-        $sql .= " AND model = '$model'";
-    }
+    $whereClause = $conditions ? "WHERE " . implode(' AND ', $conditions) : "";
+    $sql = "SELECT * FROM vozila $whereClause";
 
-    if (!empty($filteri['gorivo'])) {
-        $gorivo = mysqli_real_escape_string($db, $filteri['gorivo']);
-        $sql .= " AND vrsta_goriva = '$gorivo'";
-    }
-
-    if (!empty($filteri['stanje'])) {
-        $stanje = mysqli_real_escape_string($db, $filteri['stanje']);
-        $sql .= " AND novo_polovno = '$stanje'";
-    }
-
-    if (!empty($filteri['cena_od'])) {
-        $cenaOd = (int) $filteri['cena_od'];
-        $sql .= " AND cena >= $cenaOd";
-    }
-
-    if (!empty($filteri['cena_do'])) {
-        $cenaDo = (int) $filteri['cena_do'];
-        $sql .= " AND cena <= $cenaDo";
-    }
-
-    if (!empty($filteri['km_od'])) {
-        $kmOd = (int) $filteri['km_od'];
-        $sql .= " AND predjeni_kilometri >= $kmOd";
-    }
-
-    if (!empty($filteri['km_do'])) {
-        $kmDo = (int) $filteri['km_do'];
-        $sql .= " AND predjeni_kilometri <= $kmDo";
-    }
-
-    if (!empty($filteri['snaga'])) {
-        $snaga = (int) $filteri['snaga'];
-        $sql .= " AND snaga_motora >= $snaga";
-    }
-
-    // Izvršavanje upita
     $result = mysqli_query($db, $sql);
-    $output = "";
+    $output = '';
 
     if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            $output .= "<div>";
-            $output .= "Marka: " . htmlspecialchars($row['marka']) . "<br>";
-            $output .= "Model: " . htmlspecialchars($row['model']) . "<br>";
-            $output .= "Cena: " . htmlspecialchars($row['cena']) . " €<br>";
-            $output .= "Kilometraža: " . htmlspecialchars($row['predjeni_kilometri']) . " km<br>";
-            $output .= "Snaga: " . htmlspecialchars($row['snaga_motora']) . " kW<br>";
-            $output .= "</div><hr>";
+            $output .= '<div class="vozilo">';
+            $output .= '<h3>' . htmlspecialchars($row['marka'] . ' ' . $row['model']) . '</h3>';
+            $output .= '<p>Gorivo: ' . htmlspecialchars($row['vrsta_goriva']) . '</p>';
+            $output .= '<p>Stanje: ' . htmlspecialchars($row['novo_polovno']) . '</p>';
+            $output .= '<p>Cena: €' . htmlspecialchars($row['cena']) . '</p>';
+            $output .= '<p>Kilometraža: ' . htmlspecialchars($row['predjeni_kilometri']) . ' km</p>';
+            $output .= '<p>Snaga: ' . htmlspecialchars($row['snaga_motora']) . ' kW</p>';
+            $output .= '</div>';
         }
     } else {
-        $output = "<p>Nema rezultata za zadate filtere.</p>";
+        $output = '<p>Nema rezultata za zadate kriterijume.</p>';
     }
 
     return $output;
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'getModels') {
+    $marka = $_POST['marka'];
+    echo getModelsByMarka($db, $marka);
+    exit;
+}
+
+function getModelsByMarka($db, $marka) {
+    $marka = mysqli_real_escape_string($db, $marka);
+    $sql = $marka 
+        ? "SELECT DISTINCT model FROM vozila WHERE marka = '$marka'"
+        : "SELECT DISTINCT model FROM vozila";
+    
+    $result = mysqli_query($db, $sql);
+    $modelDropdown = '<option value="" disabled selected hidden>Svi modeli</option>';
+    $modelDropdown .= '<option value="">Svi modeli</option>';
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $model = htmlspecialchars($row['model']);
+            $modelDropdown .= "<option value=\"$model\">$model</option>";
+        }
+    } else {
+        $modelDropdown = '<option value="">Nema dostupnih modela</option>';
+    }
+
+    return $modelDropdown;
+}
 
 
 
