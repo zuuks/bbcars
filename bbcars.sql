@@ -16,10 +16,12 @@
 
 
 -- Dumping database structure for bbcars
+DROP DATABASE IF EXISTS `bbcars`;
 CREATE DATABASE IF NOT EXISTS `bbcars` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `bbcars`;
 
 -- Dumping structure for table bbcars.kontakt
+DROP TABLE IF EXISTS `kontakt`;
 CREATE TABLE IF NOT EXISTS `kontakt` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `imeprez` varchar(100) DEFAULT NULL,
@@ -35,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `kontakt` (
 DELETE FROM `kontakt`;
 
 -- Dumping structure for table bbcars.users
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
@@ -51,6 +54,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `user_level`) VALUES
 	(16, 'dejan', 'b7bc5176c1ea7208ddf7e8c4994ae47c', 0);
 
 -- Dumping structure for table bbcars.vozila
+DROP TABLE IF EXISTS `vozila`;
 CREATE TABLE IF NOT EXISTS `vozila` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cena` int(11) DEFAULT NULL,
