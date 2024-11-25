@@ -152,7 +152,7 @@ $total_pages = ceil($total_items / $items_per_page);
                                     <td>" . $row['uvoz_domace'] . "</td>
                                     <td>" . $row['cena'] . "</td>
                                     <td>
-                                        <a href='" . URL_INDEX . "?module=salon&action=edit&id=" . $row['id'] . "' class='navdugme'>
+                                        <a href='" . URL_INDEX . "?module=salon&action=edit&id=" . $row['id'] . "' class='navdugme' onclick='return confirm(\"Da li ste sigurni da želite da izmenite ovo vozilo?\")'>
                                             <button class='btn-edit'>Izmeni</button>
                                         </a>
                                 
