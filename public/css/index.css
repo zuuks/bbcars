@@ -302,13 +302,6 @@ textarea{
 }
 /*prodavnica*/
 
-.filteri{
-    margin: auto;
-    margin-top: 4%;
-    width: 1400px;
-    height: 300px;
-    background-color: red;
-}
 .h3Prod{
     position: absolute;
     margin-top: -40px;
@@ -487,7 +480,7 @@ table tbody tr:hover {
 }
 .dugmezaKola {
     position: absolute;
-    right: 2px;
+    right: 10px;
     bottom: 30px;
     padding: 8px 12px;
     background-color: #578790;
@@ -508,8 +501,34 @@ table tbody tr:hover {
     margin-bottom: 30px;
     padding: 5px;
     position: relative;
-    background-color: rgb(196, 196, 196);
-    border-radius: 20px;
+}
+.podaciVozilo{
+    background-color: rgb(221, 221, 221);
+    padding: 5px;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.filteri{
+    margin: auto;
+    margin-top: 4%;
+    width: 1400px;
+    height: 300px;
+    background-color: rgb(221, 221, 221);
+    
+    
+}
+.shoptr{
+    border: none;
+    
+}
+.shoptd{
+    border: none;
+    text-align: center;
+    border-right: 1px solid grey;
+}
+.selectshop{
+    border-radius: 0px;
+    border: 1px solid grey;
 }
 /* Kontejner za dugmadi */
 .buttons-container {

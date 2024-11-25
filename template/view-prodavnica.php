@@ -5,25 +5,25 @@
     <div class="filteri">
         <h1 class="h3Prod">Automobili</h1>
         <table class="filteri">
-            <tr>
-                <td><?php echo getMarke($db); ?></td>
-                <td><?php echo getModel($db); ?></td>
+            <tr class="shoptr">
+                <td class="shoptd"><?php echo getMarke($db); ?></td>
+                <td class="shoptd"><?php echo getModel($db); ?></td>
             </tr>
-            <tr>
-                <td><?php echo getGorivo($db); ?></td>
-                <td><?php echo getStanje($db); ?></td>
+            <tr class="shoptr">
+                <td class="shoptd"><?php echo getGorivo($db); ?></td>
+                <td class="shoptd"><?php echo getStanje($db); ?></td>
             </tr>
-            <tr>
-                <td><input type="text" id="cenaod" placeholder="Cena od €">
+            <tr class="shoptr">
+                <td class="shoptd"><input type="text" id="cenaod" placeholder="Cena od €">
                     <input type="text" id="cenado" placeholder="Cena do €">
                 </td>
-                <td><input type="text" id="kmod" placeholder="KM od">
+                <td class="shoptd"><input type="text" id="kmod" placeholder="KM od">
                     <input type="text" id="kmdo" placeholder="KM do">
                 </td>
             </tr>
-            <tr>
-                <td><input type="text" id="snaga" placeholder="Snaga (kw)"></td>
-                <td><button id="filteriProdavnica">Pogledaj</button></td>
+            <tr class="shoptr">
+                <td class="shoptd"><input type="text" id="snaga" placeholder="Snaga (kw)"></td>
+                <td class="shoptd"><button id="filteriProdavnica">Pogledaj</button></td>
             </tr>
         </table>
         <h1 class="h1prod2">Izdvajamo za vas...</h1>

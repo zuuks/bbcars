@@ -8,7 +8,7 @@ $_page_view['view_filename'] = DIR_VIEW . 'view-prodavnica.php';
 function getMarke($db) {
     $sql = "SELECT DISTINCT marka FROM vozila"; 
     $result = mysqli_query($db, $sql);
-    $markaDropdown = '<select name="marka">';
+    $markaDropdown = '<select name="marka" class="selectshop">';
     $markaDropdown .= '<option value="" disabled selected hidden>Sve marke</option>';
     $markaDropdown .= '<option value="">Sve marke</option>'; 
     if ($result && mysqli_num_rows($result) > 0) {
@@ -27,7 +27,7 @@ function getMarke($db) {
 function getModel($db) {
     $sql = "SELECT DISTINCT model FROM vozila"; 
     $result = mysqli_query($db, $sql);
-    $modelDropdown = '<select name="model">';
+    $modelDropdown = '<select name="model" class="selectshop">';
     $modelDropdown .= '<option value="" disabled selected hidden>Svi modeli</option>';
     $modelDropdown .= '<option value="">Svi modeli</option>'; 
     if ($result && mysqli_num_rows($result) > 0) {
@@ -46,7 +46,7 @@ function getModel($db) {
 function getGorivo($db) {
     $sql = "SELECT DISTINCT vrsta_goriva FROM vozila"; 
     $result = mysqli_query($db, $sql);
-    $gorivoDropdown = '<select name="gorivo">';
+    $gorivoDropdown = '<select name="gorivo" class="selectshop">';
     $gorivoDropdown .= '<option value="" disabled selected hidden>Vrsta goriva</option>';
     $gorivoDropdown .= '<option value="">Sve</option>'; 
     if ($result && mysqli_num_rows($result) > 0) {
@@ -65,7 +65,7 @@ function getGorivo($db) {
 function getStanje($db) {
     $sql = "SELECT DISTINCT novo_polovno FROM vozila"; 
     $result = mysqli_query($db, $sql);
-    $stanjeDropdown = '<select name="stanje">';
+    $stanjeDropdown = '<select name="stanje" class="selectshop">';
     $stanjeDropdown .= '<option value="" disabled selected hidden>Stanje</option>';
     $stanjeDropdown .= '<option value="">Sve</option>'; 
     if ($result && mysqli_num_rows($result) > 0) {
@@ -138,7 +138,7 @@ function filterVozila($db, $filters) {
             $slika = htmlspecialchars($row['slika']); // Obezbeđujemo sigurnu putanju
             $id = htmlspecialchars($row['id']); // ID iz baze za dinamički URL
             $output .= '<div class="vozilo">';
-            $output .= '<div class="slikaVozilo" style="background-image: url(\'' . $slika . '\'); background-size: cover; background-position: center; width: 300px; height: 200px;">';
+            $output .= '<div class="slikaVozilo" style="background-image: url(\'' . $slika . '\'); background-size: cover; background-position: center; width: 300px; height: 200px; border-radius:10px 10px 0px 0px;">';
             $output .= '</div>';
             $output .= '<div class="podaciVozilo">';
             $output .= '<h2>' . htmlspecialchars($row['marka'] . ' ' . $row['model']) . '</h2>';
