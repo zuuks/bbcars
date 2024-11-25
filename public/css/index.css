@@ -89,23 +89,7 @@ body{
 }
 
 
-.ime {
-    width: 10em;
-    height: 3em;
-    position: absolute;
-    top: 15%;
-    color: rgb(0, 0, 0);
-    border-radius: 0px 20px 20px 0;
-    background-color: rgb(255, 255, 255);
-    border: 2px solid #27272759;
-    border-left: none;
-    z-index: 1;
-}
 
-.ime h1 {
-    margin: auto;
-    text-align: center;
-}
 img{
     width: 100%;
 }
@@ -516,6 +500,40 @@ table tbody tr:hover {
     background-color: rgb(221, 221, 221);
     
     
+}
+.slikakola{
+    max-width: 600px;
+    max-height: 300px;
+   background-position: cover;
+}
+.h1auto{
+    text-align: center;
+    font-size: 48px;
+}
+.h2auto{
+    text-align: center;
+    font-size: 32px;
+}
+.podacivozila{
+    margin-top: 20px;
+    padding-bottom: 80px;
+    display: flex;
+    align-items: flex-start; /* ili center ako želite centriranje */
+}
+.levoauto{
+    height: auto;
+    margin: auto;
+}
+.autoInfo{
+    width: 200px;
+    font-size: 24px;
+    color: black;
+}
+.desnoauto{
+    flex: 1;
+}
+.smanjije{
+    padding: 3px;
 }
 .shoptr{
     border: none;
