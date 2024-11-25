@@ -34,7 +34,7 @@
             <!-- Ostavljen prazan prostor za statistiku -->
             <div class="statistika-content">
                 <!-- Dodaj statistiku ovde -->
-                <canvas id="myPieChart" width="100" height="100"></canvas>
+                <canvas id="myPieChart" width="500px" height="50px"></canvas>
             </div>
         </section>
     </main>
