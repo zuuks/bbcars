@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="public/css/style.css">
 	<link rel="stylesheet" type="text/css" href="public/css/index.css">
 	<link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script src="https://kit.fontawesome.com/4d1e1be6f0.js" crossorigin="anonymous"></script>
 </head>
 
