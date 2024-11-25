@@ -69,10 +69,14 @@ $total_pages = ceil($total_items / $items_per_page);
             <ul>
             <?php if (is_admin()): ?>
                 <li>
-                    <a href="<?= URL_INDEX ?>?module=admin-">Dashboard</a>
+                    <a href="<?= URL_INDEX ?>?module=admin-panel">Dashboard</a>
                 </li>
             <?php endif; ?>
-            <li><a href="#">Korisnici</a></li>
+            <?php if (is_admin()): ?>
+                <li>
+                    <a href="<?= URL_INDEX ?>?module=user">Korisnici</a>
+                </li>
+            <?php endif; ?>
             <?php if (is_admin()): ?>
                 <li>
                     <a href="<?= URL_INDEX ?>?module=statistics">Statistika</a>
@@ -85,19 +89,19 @@ $total_pages = ceil($total_items / $items_per_page);
     <!-- Main Content -->
     <main class="content">
     <header class="admin-header">
-    <h1 class="admin">Dobrodošao, Admin</h1>
-    <?php if (is_admin()): ?>
-        <div class="buttons-container">
-            <a href="<?= URL_INDEX ?>?module=salon&action=submit" class="navdugme">
-                <button class="btn-primary">Dodaj novi automobil</button>
-            </a>
-            <!-- Dugme za export -->
-            <a href="<?= URL_INDEX ?>?module=admin-panel&action=export" class="navdugme">
-                <button class="btn-export">Export to JSON</button>
-            </a>
-        </div>
-    <?php endif; ?>
-</header>
+        <h1 class="admin">Dobrodošao, Admin</h1>
+            <?php if (is_admin()): ?>
+                <div class="buttons-container">
+                    <a href="<?= URL_INDEX ?>?module=salon&action=submit" class="navdugme">
+                        <button class="btn-primary">Dodaj novi automobil</button>
+                    </a>
+                    <!-- Dugme za export -->
+                    <a href="<?= URL_INDEX ?>?module=admin-panel&action=export" class="navdugme">
+                        <button class="btn-export">Export to JSON</button>
+                    </a>
+                </div>
+            <?php endif; ?>
+    </header>
         
         <!-- Data Table -->
         <section class="sekcijaadmin">

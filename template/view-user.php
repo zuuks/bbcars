@@ -26,14 +26,14 @@
     <!-- Main Content -->
     <main class="content">
         <header>
-            <h1 class="admin">Statistika</h1>
+            <h1 class="admin">Korisnici</h1>
         </header>
         
-        <!-- Statistika Sekcija -->
-        <section class="sekcijastatistika">
+        <!-- Korisnik Sekcija -->
+        <section class="sekcijaKorisnik">
             <!-- Ostavljen prazan prostor za statistiku -->
-            <div class="statistika-content">
-                <!-- Dodaj statistiku ovde -->
+            <div class="korisnik-content">
+                <!-- Dodaj korisnik ovde -->
             </div>
         </section>
     </main>

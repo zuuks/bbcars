@@ -34,11 +34,18 @@
 		</ul>
 	<?php endif; ?>
 </message>
-<?php if (($_page_view['admin_confirmation'] ?? '') == 1): ?>
-	<form method="post" class="formaBrisi">
-		<div style="color:white;">Da li ste sigurni da želite da obrišete ovaj auto?</div>
-		<button name="confirm_action" value="1" class="kontaktSalji">Da</button>
-		<button name="confirm_action" value="0" class="kontaktSalji">Ne</button>
-	</form>
+<?php if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])): ?>
+    <?php
+        // Preuzimanje podataka o vozilu da bismo ih prikazali u formi (ako je potrebno)
+        $vehicle_id = $_GET['id'];
+        $sql = "SELECT marka, model FROM vozila WHERE id = $vehicle_id";
+        $result = $conn->query($sql);
+        $vehicle = $result->fetch_assoc();
+    ?>
+    <form method="post" class="formaBrisi">
+        <div style="color:white;">Da li ste sigurni da želite da obrišete automobil <?= $vehicle['marka'] ?> <?= $vehicle['model'] ?>?</div>
+        <button name="confirm_action" value="1" class="kontaktSalji">Da</button>
+        <button name="confirm_action" value="0" class="kontaktSalji">Ne</button>
+    </form>
 <?php endif; ?>
 
