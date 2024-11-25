@@ -1,5 +1,9 @@
 <?php
-$_page_view['view_filename'] = DIR_VIEW . 'view-admin-panel.php';
+if($_SESSION['login_status'] ?? '' == true && is_admin()){
+    $_page_view['view_filename'] = DIR_VIEW . 'view-admin-panel.php';
+}else{
+    redirect(URL_INDEX . '?module=login&action=login');
+}
 require 'config.php';
 
 // Povezivanje sa bazom
