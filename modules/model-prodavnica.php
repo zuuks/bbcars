@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
 function filterVozila($db, $filters) {
     $conditions = [];
-    
+    $conditions[] = "prodato_vozilo = 0";
     if (!empty($filters['marka'])) {
         $marka = mysqli_real_escape_string($db, $filters['marka']);
         $conditions[] = "marka = '$marka'";

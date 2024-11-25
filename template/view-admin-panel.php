@@ -81,7 +81,6 @@
                 <tbody>
                     <?php
                     if ($result->num_rows > 0) {
-                        // Prikazivanje podataka u tabeli
                         while ($row = $result->fetch_assoc()) {
                             echo
                                 "<tr>
@@ -98,7 +97,6 @@
                     <td>" . $row['cena'] . "</td>
                     <td>";
 
-                            // Provera da li je vozilo prodato
                             if ($row['prodato_vozilo'] == 1) {
                                 echo "<span class='status-prodato'>PRODATO</span>";
                             } else {
@@ -130,6 +128,5 @@
 </div>
 
 <?php
-// Zatvaranje konekcije
 $conn->close();
 ?>
