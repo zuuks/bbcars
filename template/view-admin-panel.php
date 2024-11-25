@@ -159,6 +159,7 @@ $total_pages = ceil($total_items / $items_per_page);
                                         <a href='" . URL_INDEX . "?module=salon&action=delete&id=" . $row['id'] . "' class='navdugme'>
                                             <button class='btn-delete'>Obriši</button>
                                         </a>
+
                                     </td>
                                 </tr>";
                     

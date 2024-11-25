@@ -113,15 +113,26 @@ if ($_app['action'] != '') {
             $_page_view['page_title'] = 'Izmeni vozilo';
             $_page_view['view_filename'] = './template/view-vozilo-submit.php';
             break;
-        case 'delete':
-            // Brisanje vozila iz baze
-            $sql = "DELETE FROM `vozila` WHERE `id`={$_app['id']} LIMIT 1";
-            mysqli_query($db, $sql);
-            redirect(URL_INDEX . "?module=admin-panel");
-            break;
-        default:
-            $_page_view['page_title'] = 'Ne postoji akcija';
-            break;
+            case 'delete':
+                if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+                    $vozilo_id = (int)$_GET['id'];
+                    if ($vozilo_id > 0) {
+                        // Brisanje vozila
+                        $sql = "DELETE FROM `vozila` WHERE `id` = $vozilo_id LIMIT 1";
+                        if (mysqli_query($db, $sql)) {
+                            // Brisanje slike povezane sa vozilom
+                            $folderPath = DIR_PUBLIC_IMAGES . "vozilo-" . $vozilo_id;
+                            if (is_dir($folderPath)) {
+                                array_map('unlink', glob("$folderPath/*.*"));
+                                rmdir($folderPath);
+                            }
+                            redirect(URL_INDEX . "?module=admin-panel&msg=success");
+                        } else {
+                            redirect(URL_INDEX . "?module=admin-panel&msg=error");
+                        }
+                    }
+                }
+                break;
     }
 } else {
     if ($_app['id'] > 0) {
