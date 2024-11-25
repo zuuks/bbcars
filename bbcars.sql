@@ -20,6 +20,49 @@ DROP DATABASE IF EXISTS `bbcars`;
 CREATE DATABASE IF NOT EXISTS `bbcars` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `bbcars`;
 
+-- Dumping structure for table bbcars.kontakt
+DROP TABLE IF EXISTS `kontakt`;
+CREATE TABLE IF NOT EXISTS `kontakt` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `imeprez` varchar(100) DEFAULT NULL,
+  `adresa` varchar(100) DEFAULT NULL,
+  `fon` varchar(100) DEFAULT NULL,
+  `osobe` varchar(100) DEFAULT NULL,
+  `auto` varchar(100) DEFAULT NULL,
+  `napomena` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table bbcars.kontakt: ~0 rows (approximately)
+DELETE FROM `kontakt`;
+
+-- Dumping structure for table bbcars.users
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `user_level` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table bbcars.users: ~12 rows (approximately)
+DELETE FROM `users`;
+INSERT INTO `users` (`id`, `username`, `password`, `user_level`) VALUES
+	(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 1),
+	(16, 'dejan', 'b7bc5176c1ea7208ddf7e8c4994ae47c', 0),
+	(20, 'marko', 'b7bc5176c1ea7208ddf7e8c4994ae47c', 0),
+	(25, 'mihajlo', 'b7bc5176c1ea7208ddf7e8c4994ae47c', 0),
+	(26, 'spasoje', 'b7bc5176c1ea7208ddf7e8c4994ae47c', 0),
+	(27, 'jasar', 'b7bc5176c1ea7208ddf7e8c4994ae47c', 0),
+	(28, 'miljan', 'b7bc5176c1ea7208ddf7e8c4994ae47c', 0),
+	(29, 'zeljko', 'b7bc5176c1ea7208ddf7e8c4994ae47c', 0),
+	(30, 'joca', 'b7bc5176c1ea7208ddf7e8c4994ae47c', 0),
+	(31, 'nikola', 'b7bc5176c1ea7208ddf7e8c4994ae47c', 0),
+	(32, 'luka', 'b7bc5176c1ea7208ddf7e8c4994ae47c', 0),
+	(33, 'mare', 'b7bc5176c1ea7208ddf7e8c4994ae47c', 0);
+
 -- Dumping structure for table bbcars.vozila
 DROP TABLE IF EXISTS `vozila`;
 CREATE TABLE IF NOT EXISTS `vozila` (
