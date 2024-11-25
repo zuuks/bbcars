@@ -4,13 +4,21 @@
         <h2>Admin Panel</h2>
         <nav>
             <ul>
+            <?php if (is_admin()): ?>
                 <li>
                     <a href="<?= URL_INDEX ?>?module=admin-panel">Dashboard</a>
                 </li>
-
+            <?php endif; ?>
+            <?php if (is_admin()): ?>
                 <li>
                     <a href="<?= URL_INDEX ?>?module=statistics">Statistika</a>
-                </li> 
+                </li>
+            <?php endif; ?>    
+            <?php if (is_admin()): ?>
+                <li>
+                    <a href="<?= URL_INDEX ?>?module=korisnici">Korisnici</a>
+                </li>
+            <?php endif; ?>    
             </ul>
         </nav>
     </aside>
