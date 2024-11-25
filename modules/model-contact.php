@@ -41,5 +41,6 @@ function getVozila($db)
 	}
 
 	return $options;
+	//
 }
 ?>
