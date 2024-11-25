@@ -22,70 +22,66 @@
     </script>
 </head>
 <main>
-    <div class="ime">
-        <h1>
-            <?= $article['salon_title'] ?>
-        </h1>
-    </div>
-    <div class="slideshow-container">
-        <?php
-        $folderPath = DIR_PUBLIC_IMAGES . 'salon-' . $article['salon_id'] . DIRECTORY_SEPARATOR;
-
-        if (is_dir($folderPath)) {
-            $files = glob($folderPath . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
-
-            foreach ($files as $file) {
-                ?>
-                <div class="mySlides fade">
-                    <img src="<?= $file ?>">
-                </div>
-                <?php
-            }
-
-        }
-        ?>
-        <a class="prev" onclick="promeniSlide(-1)">&#10094;</a>
-        <a class="next" onclick="promeniSlide(1)">&#10095;</a>
-    </div>
-    <div class="info">
-        <table>
+    <h1 class="h1auto"><?= $article['marka'] ?>  <?= $article['model'] ?></h1>
+    <p class="h2auto"><?= $article['opis'] ?> </p>
+    <div class="podacivozila">
+        <div class="levoauto">
+        <img src="<?= $article['slika'] ?>" alt="">
+        </div>
+        <div class="desnoauto">
+        <table class ="tablaKOLA" style=" background-color: rgb(221, 221, 221); border:none; height:auto;">
             <tr>
-                <td>Dužina</td>
-                <td>Snaga</td>
-                <td>Potrosnja</td>
-                <td>Cena</td>
-            </tr>
-            <tr>
-                <td class="velikaSlova">
-                    <?= $article['duzina'] ?><span class="jedinice">mm</span>
-                </td>
-                <td class="velikaSlova">
-                    <?= $article['snaga'] ?><span class="jedinice">kw*</span>
-                </td>
-                <td class="velikaSlova">
-                    <?= $article['potrosnja'] ?>l/100<span class="jedinice">km</span>
-                </td>
-                <td class="velikaSlova">
-                    <?= $article['cena'] ?>€
+                <td class="autoInfo  smanjije">Cena:</td>
+                <td class="velikaSlova smanjije">
+                    <?= $article['cena'] ?><span class="jedinice">€</span>
                 </td>
             </tr>
             <tr>
-                <td></td>
-                <td>(~
-                    <?= round($article['snaga'] * 1.34102) ?> KS)
+                <td class="autoInfo smanjije">Vrsta goriva:</td>
+                <td class="velikaSlova smanjije">
+                    <?= $article['vrsta_goriva'] ?><span class="jedinice"></span>
                 </td>
-                <td>zavisno od korišćenog seta guma/točkova</td>
-                <td>već od <b>
-                        <?= round($article['cena'] / 60) ?>€
-                    </b> mesečno</td>
             </tr>
+            <tr>
+                <td class="autoInfo smanjije">Godiste:</td>
+                <td class="velikaSlova smanjije">
+                    <?= $article['godiste'] ?><span class="jedinice"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="autoInfo smanjije">Kilometraza:</td>
+                <td class="velikaSlova smanjije">
+                    <?= $article['predjeni_kilometri'] ?><span class="jedinice">km</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="autoInfo smanjije">Kubikaza:</td>
+                <td class="velikaSlova smanjije">
+                    <?= $article['kubikaza'] ?><span class="jedinice">ccm</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="autoInfo smanjije">Snaga:</td>
+                <td class="velikaSlova smanjije">
+                    <?= $article['snaga_motora'] ?><span class="jedinice">kw</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="autoInfo smanjije">Stanje:</td>
+                <td class="velikaSlova smanjije">
+                    <?= $article['novo_polovno'] ?><span class="jedinice"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="autoInfo smanjije">Poreklo:</td>
+                <td class="velikaSlova smanjije">
+                    <?= $article['uvoz_domace'] ?><span class="jedinice"></span>
+                </td>
+            </tr>
+
         </table>
-        <p class="videoinfo">Video recenzija vozila <br><span><a
-                    href="./index.php?module=salon&id=<?= $article['salon_id'] ?>#video" class="strela"><i
-                        class="fa-solid fa-angle-down"></i></a></span></p>
-
+        </div>
+        
     </div>
-    <div id="video" style="margin-left: 18%; margin-right: 25%;">
-        <?= $article['recenzija'] ?>
-    </div>
+   
 </main>
