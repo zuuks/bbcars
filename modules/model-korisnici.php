@@ -1,5 +1,9 @@
 <?php
+
+
 $_page_view['view_filename'] = DIR_VIEW . 'view-korisnici.php';
+
+
 require 'config.php';
 
 // Povezivanje sa bazom
@@ -37,4 +41,28 @@ $result = $conn->query($sql);
 if (!$result) {
     die("Greška u SQL upitu: " . $conn->error);
 }
+
+
+// Broj korisnika po stranici
+$usersPerPage = 10;
+
+// Trenutna stranica
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = max($page, 1); // Osigurajte da stranica ne može biti manja od 1
+
+// Izračunajte početnu poziciju za LIMIT
+$start = ($page - 1) * $usersPerPage;
+
+// Ukupno korisnika u bazi
+$totalUsersQuery = $db->query("SELECT COUNT(*) AS total FROM users");
+$totalUsers = $totalUsersQuery->fetch_assoc()['total'];
+
+// Izračunajte ukupan broj stranica
+$totalPages = ceil($totalUsers / $usersPerPage);
+
+// Dohvat korisnika za trenutnu stranicu
+$result = $db->query("SELECT * FROM users LIMIT $start, $usersPerPage");
+
+
+
 ?>
