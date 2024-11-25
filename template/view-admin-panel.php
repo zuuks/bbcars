@@ -1,3 +1,49 @@
+<style>
+
+.pagination {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    top: -4px;  /* Pomera paginaciju ka gore */
+    font-family: Arial, sans-serif;
+}
+
+
+.pagination span {
+    font-size: 18px;  /* Povecaj font za broj stranice */
+    font-weight: bold;
+    color: #888;  /* Svetlija boja za broj stranice */
+}
+
+.pagination a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+    background-color: rgb(37, 118, 136);
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
+    background-color: rgb(40, 150, 150);
+}
+
+.pagination-prev,
+.pagination-next {
+    font-weight: bold;
+}
+
+.pagination-prev:disabled,
+.pagination-next:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+
+</style>
+
 <?php
 // Povezivanje sa bazom podataka
 $servername = "localhost";
