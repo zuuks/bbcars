@@ -530,6 +530,22 @@ table tbody tr:hover {
     border-radius: 0px;
     border: 1px solid grey;
 }
+.inputshop{
+    padding: 10px;
+    width: 100px;
+}
+#filteriProdavnica{
+    padding: 15px 50px;
+    background-color: #578790;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+#filteriProdavnica:hover {
+    background-color: #364548;
+}
 /* Kontejner za dugmadi */
 .buttons-container {
     display: flex; /* Omogućava raspored elemenata u redu */

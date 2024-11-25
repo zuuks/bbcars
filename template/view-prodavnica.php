@@ -14,15 +14,15 @@
                 <td class="shoptd"><?php echo getStanje($db); ?></td>
             </tr>
             <tr class="shoptr">
-                <td class="shoptd"><input type="text" id="cenaod" placeholder="Cena od €">
-                    <input type="text" id="cenado" placeholder="Cena do €">
+                <td class="shoptd"><input type="text" id="cenaod" placeholder="Cena od €" class="inputshop">
+                    <input type="text" id="cenado" placeholder="Cena do €" class="inputshop">
                 </td>
-                <td class="shoptd"><input type="text" id="kmod" placeholder="KM od">
-                    <input type="text" id="kmdo" placeholder="KM do">
+                <td class="shoptd"><input type="text" id="kmod" placeholder="KM od" class="inputshop">
+                    <input type="text" id="kmdo" placeholder="KM do" class="inputshop">
                 </td>
             </tr>
             <tr class="shoptr">
-                <td class="shoptd"><input type="text" id="snaga" placeholder="Snaga (kw)"></td>
+                <td class="shoptd"><input type="text" id="snaga" placeholder="Snaga (kw)" class="inputshop"></td>
                 <td class="shoptd"><button id="filteriProdavnica">Pogledaj</button></td>
             </tr>
         </table>
