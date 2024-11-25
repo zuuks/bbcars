@@ -32,7 +32,8 @@
         <?php if (!empty($message)): ?>
             <p><?= htmlspecialchars($message) ?></p>
         <?php endif; ?>
-        <table class="korisnici-tabela">
+       <div class="koristabela">
+       <table class="korisnici-tabela">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -63,5 +64,6 @@
                 <?php endif; ?>
             </tbody>
         </table>
+       </div>
                 </section>
     </div>

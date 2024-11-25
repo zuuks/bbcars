@@ -654,10 +654,12 @@ table tbody tr:hover {
     background-color: #ccc;
     cursor: not-allowed;
 }
-
+.koristabela{
+    margin-left: 200px;
+}
 /* Korisnici CSS */
 .korisnici-tabela {
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
     margin: 0 auto;
     background-color: #3a3a3a;

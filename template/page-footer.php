@@ -21,7 +21,7 @@
             body.style.backgroundImage = "none";
             body.style.backgroundColor = "white";
             header.style.backgroundColor = "rgb(87, 135, 144)";
-        } else if (moduleParam === 'admin-panel') {
+        } else if (moduleParam === 'admin-panel' || moduleParam === 'korisnici' ) {
             body.style.backgroundImage = "none";
             body.style.backgroundColor = "#1A1A1A";
             header.style.backgroundColor = "rgb(87, 135, 144)";
