@@ -22,7 +22,7 @@ if ($conn->connect_error) {
 // Proverite da li je zahtev za izvoz
 if (isset($_GET['action']) && $_GET['action'] == 'export') {
     // SQL upit za dobijanje svih automobila
-    $sql = "SELECT id, cena, marka, model, godiste, predjeni_kilometri FROM vozila";
+    $sql = "SELECT id, cena, marka, model, godiste, predjeni_kilometri, prodato_vozilo FROM vozila";
     $result = $conn->query($sql);
 
     // Kreiranje niza za skladištenje podataka o vozilima
@@ -56,7 +56,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $start_from = ($page - 1) * $items_per_page;
 
 // SQL upit za dobijanje vozila sa paginacijom
-$sql = "SELECT id, cena, marka, model, godiste, predjeni_kilometri, vrsta_goriva, kubikaza, snaga_motora, novo_polovno, uvoz_domace FROM vozila LIMIT $start_from, $items_per_page";
+$sql = "SELECT id, cena, marka, model, godiste, predjeni_kilometri, vrsta_goriva, kubikaza, snaga_motora, novo_polovno, uvoz_domace, prodato_vozilo FROM vozila LIMIT $start_from, $items_per_page";
 $result = $conn->query($sql);
 
 // Dobijanje ukupnog broja vozila

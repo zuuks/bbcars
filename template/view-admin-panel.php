@@ -85,39 +85,45 @@
                         while ($row = $result->fetch_assoc()) {
                             echo
                                 "<tr>
-                                    <td>" . $row['id'] . "</td>
-                                    <td>" . $row['marka'] . "</td>
-                                    <td>" . $row['model'] . "</td>
-                                    <td>" . $row['godiste'] . "</td>
-                                    <td>" . $row['predjeni_kilometri'] . "</td>
-                                    <td>" . $row['vrsta_goriva'] . "</td>
-                                    <td>" . $row['kubikaza'] . "</td>
-                                    <td>" . $row['snaga_motora'] . "</td>
-                                    <td>" . $row['novo_polovno'] . "</td>
-                                    <td>" . $row['uvoz_domace'] . "</td>
-                                    <td>" . $row['cena'] . "</td>
-                                    <td>
-                                        <a href='" . URL_INDEX . "?module=salon&action=edit&id=" . $row['id'] . "' class='navdugme' onclick='return confirm(\"Da li ste sigurni da želite da izmenite ovo vozilo?\")'>
-                                            <button class='btn-edit'>Izmeni</button>
-                                        </a>
-                                
-                                        <a href='" . URL_INDEX . "?module=salon&action=delete&id=" . $row['id'] . "' class='navdugme' onclick='return confirm(\"Da li ste sigurni da želite da obrišete ovo vozilo?\")'>
-                                        <button class='btn-delete'>Obriši</button>
-                                        </a>
-                                        <a href='" . URL_INDEX . "?module=salon&action=prodaj&id=" . $row['id'] . "' class='navdugme' onclick='return confirm(\"Da li ste sigurni da želite da oznacite vozilo kao prodano?\")'>
-                                        <button class='btn-prodaj'>Prodaj</button>
-                                        </a>
+                    <td>" . $row['id'] . "</td>
+                    <td>" . $row['marka'] . "</td>
+                    <td>" . $row['model'] . "</td>
+                    <td>" . $row['godiste'] . "</td>
+                    <td>" . $row['predjeni_kilometri'] . "</td>
+                    <td>" . $row['vrsta_goriva'] . "</td>
+                    <td>" . $row['kubikaza'] . "</td>
+                    <td>" . $row['snaga_motora'] . "</td>
+                    <td>" . $row['novo_polovno'] . "</td>
+                    <td>" . $row['uvoz_domace'] . "</td>
+                    <td>" . $row['cena'] . "</td>
+                    <td>";
 
+                            // Provera da li je vozilo prodato
+                            if ($row['prodato_vozilo'] == 1) {
+                                echo "<span class='status-prodato'>PRODATO</span>";
+                            } else {
+                                echo "
+                    <a href='" . URL_INDEX . "?module=salon&action=prodaj&id=" . $row['id'] . "' class='navdugme' onclick='return confirm(\"Da li ste sigurni da želite da označite vozilo kao prodano?\")'>
+                        <button class='btn-prodaj'>Prodaj</button>
+                    </a>";
+                            }
 
-                                    </td>
-                                </tr>";
-
+                            echo "
+                <a href='" . URL_INDEX . "?module=salon&action=edit&id=" . $row['id'] . "' class='navdugme' onclick='return confirm(\"Da li ste sigurni da želite da izmenite ovo vozilo?\")'>
+                    <button class='btn-edit'>Izmeni</button>
+                </a>
+                <a href='" . URL_INDEX . "?module=salon&action=delete&id=" . $row['id'] . "' class='navdugme' onclick='return confirm(\"Da li ste sigurni da želite da obrišete ovo vozilo?\")'>
+                    <button class='btn-delete'>Obriši</button>
+                </a>
+            </td>
+        </tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='7'>Nema podataka</td></tr>";
+                        echo "<tr><td colspan='12'>Nema podataka</td></tr>";
                     }
                     ?>
                 </tbody>
+
             </table>
         </section>
     </main>
