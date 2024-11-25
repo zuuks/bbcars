@@ -16,7 +16,7 @@ if ($db->connect_error) {
 }
 
 if($_SESSION['login_status'] ?? '' == true && is_admin()){
-    $_page_view['view_filename'] = DIR_VIEW . 'view-statistics.php';
+    $_page_view['view_filename'] = DIR_VIEW . 'view-admin-panel.php';
 }else{
     redirect(URL_INDEX . '?module=login&action=login');
 }

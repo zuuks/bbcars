@@ -133,6 +133,21 @@ if ($_app['action'] != '') {
                     }
                 }
                 break;
+            case 'prodaj':
+                if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+                    $vozilo_id = (int)$_GET['id'];
+                    if ($vozilo_id > 0) {
+                        // Vozilo na prodaju
+                        $sql = "UPDATE vozila SET prodato_vozilo = 1, datum_prodaje = NOW()  WHERE id =$vozilo_id LIMIT 1";
+                        if (mysqli_query($db, $sql)) {
+                           
+                            redirect(URL_INDEX . "?module=admin-panel&msg=success");
+                        } else {
+                            redirect(URL_INDEX . "?module=admin-panel&msg=error");
+                        }
+                    }
+                }
+                break;
     }
 } else {
     if ($_app['id'] > 0) {
