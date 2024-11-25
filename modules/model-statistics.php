@@ -1,6 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+
 
 $servername = "localhost";
 $username = "root";
@@ -37,6 +36,8 @@ if ($result->num_rows > 0) {
 
 // Vraćanje podataka kao JSON
 echo json_encode($data);
+ 
 
 
 ?>
+
