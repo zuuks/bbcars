@@ -1,4 +1,33 @@
+<style>
 
+.pagination {
+    display: flex;
+    justify-content: flex-start; /* Poravnanje na levo */
+    margin-top: 20px;
+    gap: 10px;
+    margin-left: 5%; /* Pomeranje na desno */
+}
+
+.pagination a {
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #444444;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #555555;
+}
+
+.pagination a.active {
+    background-color: grey;
+    color: #ffffff;
+    pointer-events: none;
+}
+
+</style>
 <link rel="stylesheet" href="./public/css/index.css">
 
 <div class="admin-panel">
@@ -32,7 +61,23 @@
         <?php if (!empty($message)): ?>
             <p><?= htmlspecialchars($message) ?></p>
         <?php endif; ?>
+        <?php if ($totalPages > 1): ?>
+    
+<?php endif; ?>
        <div class="koristabela">
+       <nav class="pagination">
+        <?php if ($page > 1): ?>
+            <a href="?module=korisnici&page=<?= $page - 1 ?>">Prethodna</a>
+        <?php endif; ?>
+        
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <a href="?module=korisnici&page=<?= $i ?>" class="<?= $i === $page ? 'active' : '' ?>"><?= $i ?></a>
+        <?php endfor; ?>
+        
+        <?php if ($page < $totalPages): ?>
+            <a href="?module=korisnici&page=<?= $page + 1 ?>">Sledeća</a>
+        <?php endif; ?>
+    </nav>
        <table class="korisnici-tabela">
             <thead>
                 <tr>
