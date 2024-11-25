@@ -40,7 +40,7 @@
     </main>
 </div>
 
-<!--<script>
+ <!-- <script>
     // Učitaj podatke iz PHP-a
     fetch('modules/model-statistics.php') // Ovdje bi trebao biti tačan URL do PHP fajla
         .then(response => response.json())
@@ -119,7 +119,7 @@
             });
         })
         .catch(error => console.error('Greška pri učitavanju podataka:', error));
-</script>-->
+</script> -->
 
 <!--<script>
     // Učitaj podatke iz PHP-a
@@ -203,7 +203,7 @@
     fetch('modules/model-statistics.php') // Ovdje bi trebao biti tačan URL do PHP fajla
         .then(response => response.json())
         .then(data => {
-            console.log(data); // Proveri dobijene podatke u konzoli
+            //console.log(data); // Proveri dobijene podatke u konzoli
             // Priprema podataka za chart
             const labels = data.map(item => item.marka);
             const values = data.map(item => item.broj_vozila);
