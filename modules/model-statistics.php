@@ -16,7 +16,6 @@ if ($db->connect_error) {
 }
 
 $_page_view['view_filename'] ='./template/view-statistics.php';
-
 // Ispravi SQL upit
 $sql = "SELECT marka, COUNT(*) as broj_vozila
         FROM vozila
@@ -40,6 +39,4 @@ if ($result->num_rows > 0) {
 echo json_encode($data);
 
 
-
-$db->close();
 ?>
