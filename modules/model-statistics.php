@@ -15,11 +15,7 @@ if ($db->connect_error) {
     die("Povezivanje sa bazom nije uspelo: " . $db->connect_error);
 }
 
-if($_SESSION['login_status'] ?? '' == true && is_admin()){
-    $_page_view['view_filename'] = DIR_VIEW . 'view-admin-panel.php';
-}else{
-    redirect(URL_INDEX . '?module=login&action=login');
-}
+$_page_view['view_filename'] ='./template/view-statistics.php';
 
 // Ispravi SQL upit
 $sql = "SELECT marka, COUNT(*) as broj_vozila
