@@ -123,6 +123,11 @@ $total_pages = ceil($total_items / $items_per_page);
                     <a href="<?= URL_INDEX ?>?module=statistics">Statistika</a>
                 </li>
             <?php endif; ?>    
+            <?php if (is_admin()): ?>
+                <li>
+                    <a href="<?= URL_INDEX ?>?module=korisnici">Korisnici</a>
+                </li>
+            <?php endif; ?>    
             </ul>
         </nav>
     </aside>
