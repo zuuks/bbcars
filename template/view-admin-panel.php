@@ -156,9 +156,10 @@ $total_pages = ceil($total_items / $items_per_page);
                                             <button class='btn-edit'>Izmeni</button>
                                         </a>
                                 
-                                        <a href='" . URL_INDEX . "?module=salon&action=delete&id=" . $row['id'] . "' class='navdugme'>
-                                            <button class='btn-delete'>Obriši</button>
+                                        <a href='" . URL_INDEX . "?module=salon&action=delete&id=" . $row['id'] . "' class='navdugme' onclick='return confirm(\"Da li ste sigurni da želite da obrišete ovo vozilo?\")'>
+                                        <button class='btn-delete'>Obriši</button>
                                         </a>
+
 
                                     </td>
                                 </tr>";
