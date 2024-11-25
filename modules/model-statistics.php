@@ -18,7 +18,7 @@ $_page_view['view_filename'] ='./template/view-statistics.php';
 // Ispravi SQL upit
 $sql = "SELECT marka, COUNT(*) as broj_vozila
         FROM vozila
-        WHERE marka != '' AND marka IS NOT NULL
+        WHERE marka != '' AND marka IS NOT NULL AND prodato_vozilo = 0
         GROUP BY marka;";
 
 $result = mysqli_query($db, $sql);

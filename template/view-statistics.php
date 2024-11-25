@@ -121,7 +121,7 @@
         .catch(error => console.error('Greška pri učitavanju podataka:', error));
 </script> -->
 
-<!--<script>
+<script>
     // Učitaj podatke iz PHP-a
     fetch('modules/model-statistics.php') // Ovdje bi trebao biti tačan URL do PHP fajla
         .then(response => response.json())
@@ -196,9 +196,9 @@
             });
         })
         .catch(error => console.error('Greška pri učitavanju podataka:', error));
-</script>-->
+</script>
 
-<script>
+<!-- <script>
     // Učitaj podatke iz PHP-a
     fetch('modules/model-statistics.php') // Ovdje bi trebao biti tačan URL do PHP fajla
         .then(response => response.json())
@@ -245,4 +245,4 @@
             });
         })
         .catch(error => console.error('Greška pri učitavanju podataka:', error));
-</script>
+</script> -->
