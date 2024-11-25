@@ -505,8 +505,11 @@ table tbody tr:hover {
     margin: auto;
     float: left;
     margin-left: 30px;
+    margin-bottom: 30px;
     padding: 5px;
     position: relative;
+    background-color: rgb(196, 196, 196);
+    border-radius: 20px;
 }
 /* Kontejner za dugmadi */
 .buttons-container {
