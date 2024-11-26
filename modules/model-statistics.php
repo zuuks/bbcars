@@ -1,6 +1,8 @@
 <?php 
 
 
+$db = new mysqli("localhost", "root", "", "bbcars"); 
+
 $_page_view['view_filename'] = './template/view-statistics.php';
 
 function izvuciMarka($db)
@@ -67,4 +69,5 @@ function izvuciMarka($db)
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'vadi') {
     echo izvuciMarka($db);
 };
+mysqli_close($db);
 ?>
