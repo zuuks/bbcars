@@ -247,6 +247,9 @@ iframe {
     color: white;
     border-radius: 50px;
 }
+textarea{
+    text-align: center;
+}
 textarea::placeholder{
     text-align: center;
 }

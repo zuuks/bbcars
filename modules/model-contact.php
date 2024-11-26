@@ -29,12 +29,12 @@ function getVozila($db)
 {
 	$options = '';
 
-	$sql = "SELECT salon_title FROM salon";
+	$sql = "SELECT marka,model FROM vozila WHERE prodato_vozilo = 0";
 	$result = mysqli_query($db, $sql);
 
 	if ($result && mysqli_num_rows($result) > 0) {
 		while ($row = $result->fetch_assoc()) {
-			$options .= '<option value="' . $row["salon_title"] . '">' . $row["salon_title"] . '</option>';
+			$options .= '<option value="' . $row["marka"].' '.$row["model"].'">' . $row["marka"] .' ' .$row["model"].'</option>';
 		}
 	} else {
 		$options = "Nema rezultata iz baze podataka.";
