@@ -635,6 +635,7 @@ table tbody tr:hover {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    
     gap: 15px;
     position: relative;
     top: -4px;  /* Pomera paginaciju ka gore */
