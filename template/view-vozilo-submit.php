@@ -36,8 +36,10 @@
 				<option value="uvoz" <?= isset($article['uvoz_domac']) && $article['uvoz_domac'] == 'uvoz' ? 'selected' : '' ?>>Uvoz</option>
 				<option value="domace" <?= isset($article['uvoz_domac']) && $article['uvoz_domac'] == 'domace' ? 'selected' : '' ?>>Domaće</option>
 			</select><br>
-			
+			<label for="opis">Opis vozila:</label>
+        	<textarea name="opis" id="opis" cols="50" rows="10" required></textarea><br>
 			<label>Slike za upload</label>
+			
 			<input type="file" name="images[]" multiple><br>
 			
 			<div>
