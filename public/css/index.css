@@ -235,6 +235,7 @@ iframe {
     margin: auto;
     margin-top: 5.8em;
 }
+
 #kontaktInfo{
     text-shadow: 2px 2px 3px #272727;
     margin: auto;
@@ -247,6 +248,7 @@ iframe {
     color: white;
     border-radius: 50px;
 }
+
 textarea{
     text-align: center;
 }
