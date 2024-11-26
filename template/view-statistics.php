@@ -4,21 +4,19 @@
         <h2>Admin Panel</h2>
         <nav>
             <ul>
-            <?php if (is_admin()): ?>
-                <li>
-                    <a href="<?= URL_INDEX ?>?module=admin-panel">Dashboard</a>
-                </li>
-            <?php endif; ?>
-            <?php if (is_admin()): ?>
-                <li>
-                    <a href="<?= URL_INDEX ?>?module=statistics">Statistika</a>
-                </li>
-            <?php endif; ?>    
-            <?php if (is_admin()): ?>
-                <li>
-                    <a href="<?= URL_INDEX ?>?module=korisnici">Korisnici</a>
-                </li>
-            <?php endif; ?>    
+                <?php if (is_admin()): ?>
+                    <li>
+                <?php endif; ?>
+                <?php if (is_admin()): ?>
+                    <li>
+                        <a href="<?= URL_INDEX ?>?module=statistics">Statistika</a>
+                    </li>
+                <?php endif; ?>
+                <?php if (is_admin()): ?>
+                    <li>
+                        <a href="<?= URL_INDEX ?>?module=korisnici">Korisnici</a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </nav>
     </aside>
@@ -28,19 +26,27 @@
         <header>
             <h1 class="admin">Statistika</h1>
         </header>
-        
+
         <!-- Statistika Sekcija -->
         <section class="sekcijastatistika">
             <!-- Ostavljen prazan prostor za statistiku -->
             <div class="statistika-content">
                 <!-- Dodaj statistiku ovde -->
-                <canvas id="myPieChart" width="500px" height="50px"></canvas>
+                <canvas id="vozilaNaStanju" width="500px" height="50px"></canvas>
+            </div>
+            <div class="statistika-content">
+                <!-- Dodaj statistiku ovde -->
+                <canvas id="prodatihPoGodinama" width="500px" height="50px"></canvas>
+            </div>
+            <div class="statistika-content">
+                <!-- Dodaj statistiku ovde -->
+                <canvas id="prodatiPoslednjihSestMeseci" width="500px" height="50px"></canvas>
             </div>
         </section>
     </main>
 </div>
 
- <!-- <script>
+<!-- <script>
     // Učitaj podatke iz PHP-a
     fetch('modules/model-statistics.php') // Ovdje bi trebao biti tačan URL do PHP fajla
         .then(response => response.json())
@@ -133,7 +139,7 @@
             const values = data.map(item => item.broj_vozila);
 
             // Kreiranje Bar Chart-a
-            const ctx = document.getElementById('myPieChart').getContext('2d');
+            const ctx = document.getElementById('vozilaNaStanju').getContext('2d');
             new Chart(ctx, {
                 type: 'bar', // Tip grafikona
                 data: {
@@ -194,6 +200,7 @@
                     }
                 }
             });
+
         })
         .catch(error => console.error('Greška pri učitavanju podataka:', error));
 </script>
