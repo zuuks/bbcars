@@ -126,7 +126,3 @@
         </section>
     </main>
 </div>
-
-<?php
-$conn->close();
-?>

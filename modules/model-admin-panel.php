@@ -6,22 +6,11 @@ if($_SESSION['login_status'] ?? '' == true && is_admin()){
 }
 require 'config.php';
 
-$conn = new mysqli(
-    $config['hostname'],
-    $config['username'],
-    $config['password'],
-    $config['db_name']
-);
-
-if ($conn->connect_error) {
-    die("Konekcija nije uspela: " . $conn->connect_error);
-}
 
 if (isset($_GET['action']) && $_GET['action'] == 'export') {
   
     $sql = "SELECT id, cena, marka, model, godiste, predjeni_kilometri, prodato_vozilo FROM vozila";
-    $result = $conn->query($sql);
-
+    $result = mysqli_query($db, $sql);
     
     $vehicles = [];
 
@@ -53,10 +42,11 @@ $start_from = ($page - 1) * $items_per_page;
 
 
 $sql = "SELECT id, cena, marka, model, godiste, predjeni_kilometri, vrsta_goriva, kubikaza, snaga_motora, novo_polovno, uvoz_domace, prodato_vozilo FROM vozila LIMIT $start_from, $items_per_page";
-$result = $conn->query($sql);
+
+$result = mysqli_query($db, $sql);
 
 $total_sql = "SELECT COUNT(*) AS total FROM vozila";
-$total_result = $conn->query($total_sql);
+$total_result = mysqli_query($db, $total_sql);
 $total_row = $total_result->fetch_assoc();
 $total_items = $total_row['total'];
 $total_pages = ceil($total_items / $items_per_page);

@@ -1,14 +1,6 @@
 <?php 
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "bbcars"; 
 
-$db = new mysqli($servername, $username, $password, $dbname); // Proveri vezu 
-if ($db->connect_error) {
-    die("Povezivanje sa bazom nije uspelo: " . $db->connect_error);
-}
 $_page_view['view_filename'] = './template/view-statistics.php';
 
 function izvuciMarka($db)

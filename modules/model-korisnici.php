@@ -7,49 +7,41 @@ if($_SESSION['login_status'] ?? '' == true && is_admin()){
 
 require 'config.php';
 
-$conn = new mysqli(
-    $config['hostname'],
-    $config['username'],
-    $config['password'],
-    $config['db_name']
-);
-
-if ($conn->connect_error) {
-    die("Konekcija nije uspela: " . $conn->connect_error);
-}
 
 $message = "";
 if (isset($_POST['ban_user'])) {
-    $user_id = intval($_POST['user_id']);
+    $user_id = intval($_POST['user_id']);  // Sanitizacija korisničkog unosa
 
-    $check_sql = "SELECT user_level FROM users WHERE id = ?";
-    $stmt_check = $conn->prepare($check_sql);
-    $stmt_check->bind_param("i", $user_id);
-    $stmt_check->execute();
-    $stmt_check->bind_result($user_level);
-    $stmt_check->fetch();
-    $stmt_check->close();
+    // Prvo proveravamo korisnički nivo
+    $check_sql = "SELECT user_level FROM users WHERE id = $user_id";
+    $result_check = mysqli_query($db, $check_sql);
 
-    if ($user_level == 1) {
-        $message = "Ne možete banovati druge admine.";
-    } else {
-        $delete_sql = "DELETE FROM users WHERE id = ?";
-        $stmt = $conn->prepare($delete_sql);
-        $stmt->bind_param("i", $user_id);
-        if ($stmt->execute()) {
-            $message = "Korisnik uspešno banovan!";
+    if ($result_check) {
+        $row = mysqli_fetch_assoc($result_check);
+        $user_level = $row['user_level'];
+
+        // Ako je korisnik admin (user_level == 1), ne možemo ga banovati
+        if ($user_level == 1) {
+            $message = "Ne možete banovati druge admine.";
         } else {
-            $message = "Došlo je do greške prilikom banovanja korisnika: " . $conn->error;
+            // Ako korisnik nije admin, brišemo ga iz baze
+            $delete_sql = "DELETE FROM users WHERE id = $user_id";
+            if (mysqli_query($db, $delete_sql)) {
+                $message = "Korisnik uspešno banovan!";
+            } else {
+                $message = "Došlo je do greške prilikom banovanja korisnika: " . mysqli_error($db);
+            }
         }
-        $stmt->close();
+    } else {
+        $message = "Došlo je do greške prilikom upita: " . mysqli_error($db);
     }
 }
 
 $sql = "SELECT id, username, user_level FROM users";
-$result = $conn->query($sql);
+$result = mysqli_query($db, $sql);
 
 if (!$result) {
-    die("Greška u SQL upitu: " . $conn->error);
+    die("Greška u SQL upitu: " . $db->error);
 }
 
 
@@ -60,13 +52,13 @@ $page = max($page, 1);
 
 $start = ($page - 1) * $usersPerPage;
 
-$totalUsersQuery = $db->query("SELECT COUNT(*) AS total FROM users");
+$totalUsersQuery =  mysqli_query($db, "SELECT COUNT(*) AS total FROM users");
 $totalUsers = $totalUsersQuery->fetch_assoc()['total'];
 
 
 $totalPages = ceil($totalUsers / $usersPerPage);
 
-$result = $db->query("SELECT * FROM users LIMIT $start, $usersPerPage");
+$result =  mysqli_query($db, "SELECT * FROM users LIMIT $start, $usersPerPage");
 
 
 
