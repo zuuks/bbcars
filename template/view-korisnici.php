@@ -1,37 +1,4 @@
-<style>
-
-.pagination {
-    display: flex;
-    justify-content: flex-start; /* Poravnanje na levo */
-    margin-top: 20px;
-    gap: 10px;
-    margin-left: 5%; /* Pomeranje na desno */
-}
-
-.pagination a {
-    padding: 10px 15px;
-    text-decoration: none;
-    color: #ffffff;
-    background-color: #444444;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-}
-
-.pagination a:hover {
-    background-color: #555555;
-}
-
-.pagination a.active {
-    background-color: grey;
-    color: #ffffff;
-    pointer-events: none;
-}
-
-</style>
-<link rel="stylesheet" href="./public/css/index.css">
-
 <div class="admin-panel">
-    <!-- Sidebar -->
     <aside class="sidebar">
         <h2>Admin Panel</h2>
         <nav>

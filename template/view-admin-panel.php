@@ -1,7 +1,6 @@
 <link rel="stylesheet" href="./public/css/index.css">
 
 <div class="admin-panel">
-    <!-- Sidebar -->
     <aside class="sidebar">
         <h2>Admin Panel</h2>
         <nav>
@@ -25,7 +24,6 @@
         </nav>
     </aside>
 
-    <!-- Main Content -->
     <main class="content">
         <header class="admin-header">
             <h1 class="admin">Dobrodošao, Admin</h1>
@@ -34,7 +32,7 @@
                     <a href="<?= URL_INDEX ?>?module=salon&action=submit" class="navdugme">
                         <button class="btn-primary">Dodaj novi automobil</button>
                     </a>
-                    <!-- Dugme za export -->
+
                     <a href="<?= URL_INDEX ?>?module=admin-panel&action=export" class="navdugme">
                         <button class="btn-export">Export to JSON</button>
                     </a>
@@ -42,11 +40,11 @@
             <?php endif; ?>
         </header>
 
-        <!-- Data Table -->
+
         <section class="sekcijaadmin">
             <h2 class="admin2">Lista Automobila</h2>
 
-            <!-- Paginacija -->
+
             <div class="pagination">
                 <?php if ($page > 1): ?>
                     <a href="<?= URL_INDEX ?>?module=admin-panel&page=<?= $page - 1 ?>"
@@ -60,7 +58,7 @@
                 <?php endif; ?>
             </div>
 
-            <!-- Tabela sa podacima -->
+
             <table>
                 <thead>
                     <tr>
@@ -83,7 +81,7 @@
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             echo
-                                "<tr>
+                            "<tr>
                     <td>" . $row['id'] . "</td>
                     <td>" . $row['marka'] . "</td>
                     <td>" . $row['model'] . "</td>
