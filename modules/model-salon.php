@@ -14,26 +14,24 @@ if ($_app['action'] != '') {
                 if (($_POST['cancel'] ?? '') == 1)
                     redirect(URL_INDEX . "?module=admin-panel");
 
-                // Preuzimanje podataka sa forme
                 $marka = $_POST['marka'];
                 $model = $_POST['model'];
-                $vrsta_goriva = $_POST['vrsta_goriva']; // Vrsta goriva
-                $godiste = $_POST['godiste']; // Godište
-                $predjeni_kilometri = $_POST['predjeni_km']; // Pređeni kilometri
-                $kubikaza = $_POST['kubikaza']; // Kubikaža
-                $snaga_motora = $_POST['snaga_motora']; // Snaga motora
-                $cena = $_POST['cena']; // Cena vozila
-                $novo_polovno = $_POST['novi_polovni']; // Novi ili polovni
-                $uvoz_domace = $_POST['uvoz_domac']; // Uvozno ili domaće
+                $vrsta_goriva = $_POST['vrsta_goriva']; 
+                $godiste = $_POST['godiste']; 
+                $predjeni_kilometri = $_POST['predjeni_km']; 
+                $kubikaza = $_POST['kubikaza'];
+                $snaga_motora = $_POST['snaga_motora']; 
+                $cena = $_POST['cena']; 
+                $novo_polovno = $_POST['novi_polovni']; 
+                $uvoz_domace = $_POST['uvoz_domac']; 
 
-                // Unos u bazu
+               
                 $sql = "INSERT INTO `vozila` 
                             (`cena`, `marka`, `model`, `vrsta_goriva`, `godiste`, `predjeni_kilometri`, `kubikaza`, `snaga_motora`, `novo_polovno`, `uvoz_domace`) 
                         VALUES
                             ('{$cena}', '{$marka}', '{$model}', '{$vrsta_goriva}', '{$godiste}', '{$predjeni_kilometri}', '{$kubikaza}', '{$snaga_motora}', '{$novo_polovno}', '{$uvoz_domace}')";
                 mysqli_query($db, $sql);
 
-                // Obrada slika
                 if (!isset($_FILES['images'])) {
                     $_page_view['_error'][] = 'Niste odabrali slike za upload.';
                 } else {
@@ -44,11 +42,11 @@ if ($_app['action'] != '') {
                             $_page_view['_error'][] = 'Došlo je do greške. Slika nije učitana';
                         } else {
 
-                            // Dobijanje ID-a poslednjeg unetog vozila
+                           
                             $vozilo_id = mysqli_insert_id($db);
                             $filename = sprintf('vozilo-%d_%d.jpg', $vozilo_id, ($key + 1));
 
-                            // Kreiranje direktorijuma za slike
+                           
                             $folderPath = DIR_PUBLIC_IMAGES . "vozilo-" . $vozilo_id;
                             if (!is_dir($folderPath) && !mkdir($folderPath, 0777, true)) {
                                 $_page_view['_error'][] = "Greška: Nije moguće kreirati direktorijum $folderPath";
@@ -56,12 +54,11 @@ if ($_app['action'] != '') {
 
                             $destination = $folderPath . DIRECTORY_SEPARATOR . $filename;
 
-                            // Provera dozvola za pisanje
                             if (!is_writable($folderPath)) {
                                 $_page_view['_error'][] = "Greška: Nemate dozvolu za pisanje u direktorijum $folderPath";
                             }
 
-                            // Premještanje fajla u direktorijum
+                          
                             move_uploaded_file($tmp_name, $destination);
                         }
                     }
@@ -76,19 +73,19 @@ if ($_app['action'] != '') {
                 if (($_POST['cancel'] ?? '') == 1)
                     redirect(URL_INDEX . "?module=admin-panel");
 
-                // Preuzimanje podataka sa forme
+            
                 $marka = $_POST['marka'];
                 $model = $_POST['model'];
-                $vrsta_goriva = $_POST['vrsta_goriva']; // Vrsta goriva
-                $godiste = $_POST['godiste']; // Godište
-                $predjeni_kilometri = $_POST['predjeni_km']; // Pređeni kilometri
-                $kubikaza = $_POST['kubikaza']; // Kubikaža
-                $snaga_motora = $_POST['snaga_motora']; // Snaga motora
-                $cena = $_POST['cena']; // Cena vozila
-                $novo_polovno = $_POST['novi_polovni']; // Novi ili polovni
-                $uvoz_domace = $_POST['uvoz_domac']; // Uvozno ili domaće
+                $vrsta_goriva = $_POST['vrsta_goriva']; 
+                $godiste = $_POST['godiste']; 
+                $predjeni_kilometri = $_POST['predjeni_km']; 
+                $kubikaza = $_POST['kubikaza']; 
+                $snaga_motora = $_POST['snaga_motora']; 
+                $cena = $_POST['cena']; 
+                $novo_polovno = $_POST['novi_polovni']; 
+                $uvoz_domace = $_POST['uvoz_domac']; 
 
-                // Ažuriranje podataka u bazi
+            
                 $sql = "UPDATE `vozila` SET
                             `cena` = '{$cena}',
                             `marka` = '{$marka}',
@@ -107,7 +104,7 @@ if ($_app['action'] != '') {
                 redirect(URL_INDEX . "?module=admin-panel");
             }
 
-            // Prikazivanje podataka za uređivanje
+           
             $sql = "SELECT * FROM `vozila` WHERE `id`={$_app['id']}";
             $result = mysqli_query($db, $sql);
             $_page_view['page_title'] = 'Izmeni vozilo';
@@ -117,10 +114,10 @@ if ($_app['action'] != '') {
                 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
                     $vozilo_id = (int)$_GET['id'];
                     if ($vozilo_id > 0) {
-                        // Brisanje vozila
+                       
                         $sql = "DELETE FROM `vozila` WHERE `id` = $vozilo_id LIMIT 1";
                         if (mysqli_query($db, $sql)) {
-                            // Brisanje slike povezane sa vozilom
+                           
                             $folderPath = DIR_PUBLIC_IMAGES . "vozilo-" . $vozilo_id;
                             if (is_dir($folderPath)) {
                                 array_map('unlink', glob("$folderPath/*.*"));
@@ -137,7 +134,7 @@ if ($_app['action'] != '') {
                 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
                     $vozilo_id = (int)$_GET['id'];
                     if ($vozilo_id > 0) {
-                        // Vozilo na prodaju
+                 
                         $sql = "UPDATE vozila SET prodato_vozilo = 1, datum_prodaje = NOW()  WHERE id =$vozilo_id LIMIT 1";
                         if (mysqli_query($db, $sql)) {
                            

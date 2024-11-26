@@ -36,7 +36,6 @@
 </message>
 <?php if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])): ?>
     <?php
-        // Preuzimanje podataka o vozilu da bismo ih prikazali u formi (ako je potrebno)
         $vehicle_id = $_GET['id'];
         $sql = "SELECT marka, model FROM vozila WHERE id = $vehicle_id";
         $result = $conn->query($sql);
