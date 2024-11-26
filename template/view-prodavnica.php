@@ -32,8 +32,7 @@
 </div>
 
 <script>
-    $(document).ready(function () {
-        // Funkcija za učitavanje automobila
+    $(document).ready(function() {
         function loadCars() {
             const filters = {
                 marka: $('select[name="marka"]').val(),
@@ -48,33 +47,37 @@
             };
 
             $.ajax({
-                url: "",  // Ovde ide vaša skripta koja obrađuje podatke
+                url: "",
                 method: 'POST',
-                data: { action: 'filter', filters: filters },
-                success: function (response) {
+                data: {
+                    action: 'filter',
+                    filters: filters
+                },
+                success: function(response) {
                     $('#rezultati').html(response);
                 },
-                error: function () {
+                error: function() {
                     $('#rezultati').html('<p>Došlo je do greške prilikom filtriranja.</p>');
                 }
             });
         }
 
-        // Učitaj automobila odmah prilikom učitavanja stranice
         loadCars();
 
-        // Kada se promeni selekcija za marku, učitaj modele
-        $('select[name="marka"]').on('change', function () {
+        $('select[name="marka"]').on('change', function() {
             const selectedMarka = $(this).val();
 
             $.ajax({
                 url: "",
                 method: 'POST',
-                data: { action: 'getModels', marka: selectedMarka },
-                success: function (response) {
+                data: {
+                    action: 'getModels',
+                    marka: selectedMarka
+                },
+                success: function(response) {
                     $('select[name="model"]').html(response);
                 },
-                error: function () {
+                error: function() {
                     $('select[name="model"]').html('<option value="">Greška pri učitavanju modela</option>');
                 }
             });
@@ -83,8 +86,8 @@
 </script>
 
 <script>
-    $(document).ready(function () {
-        $('#filteriProdavnica').on('click', function () {
+    $(document).ready(function() {
+        $('#filteriProdavnica').on('click', function() {
             const filters = {
                 marka: $('select[name="marka"]').val(),
                 model: $('select[name="model"]').val(),
@@ -100,11 +103,14 @@
             $.ajax({
                 url: "",
                 method: 'POST',
-                data: { action: 'filter', filters: filters },
-                success: function (response) {
+                data: {
+                    action: 'filter',
+                    filters: filters
+                },
+                success: function(response) {
                     $('#rezultati').html(response);
                 },
-                error: function () {
+                error: function() {
                     $('#rezultati').html('<p>Došlo je do greške prilikom filtriranja.</p>');
                 }
             });
@@ -112,19 +118,21 @@
     });
 </script>
 <script>
-    $(document).ready(function () {
-        // Kada se marka promeni, ažuriraj modele
-        $('select[name="marka"]').on('change', function () {
+    $(document).ready(function() {
+        $('select[name="marka"]').on('change', function() {
             const selectedMarka = $(this).val();
 
             $.ajax({
                 url: "",
                 method: 'POST',
-                data: { action: 'getModels', marka: selectedMarka },
-                success: function (response) {
+                data: {
+                    action: 'getModels',
+                    marka: selectedMarka
+                },
+                success: function(response) {
                     $('select[name="model"]').html(response);
                 },
-                error: function () {
+                error: function() {
                     $('select[name="model"]').html('<option value="">Greška pri učitavanju modela</option>');
                 }
             });
