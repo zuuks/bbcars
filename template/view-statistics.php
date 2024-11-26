@@ -6,6 +6,8 @@
             <ul>
                 <?php if (is_admin()): ?>
                     <li>
+                        <a href="<?= URL_INDEX ?>?module=admin-panel">Dashboard</a>
+                    </li>
                 <?php endif; ?>
                 <?php if (is_admin()): ?>
                     <li>
